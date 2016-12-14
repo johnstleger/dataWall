@@ -4,16 +4,19 @@ const express = require('express'),
 	  app = express(),
       cfenv = require('cfenv'),
 	  appEnv = cfenv.getAppEnv(),
-	  db = require('./db'),
-	  dataLoop = require('./data-loop');
+	  cors = require('cors');
 
-app.use('/', express.static('./public') );
+const db = require('./db'),
+	  loop = require('./loop');
+
+app.use(cors());
+app.use('/', express.static('./client'));
 app.use('/api', require('./routes/api'));
 
 db.connect((err)=>{
 	if(err) return console.log( 'No Mongo Connection ', err );
 	app.listen( appEnv.port, '0.0.0.0', ()=>{ 
 		console.log('Running ',appEnv.url); 
-		dataLoop.run();
+		// loop.run();
 	});
 });

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title> Havas | Data Wall </title>
+
+	<meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/> <!-- ie fix -->
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" name="viewport"/>
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+
+</head>
+<body>	
+
+	<div id='backbone-app' class='loading'>
+		<!-- <img class='guide' src='/img/guide.png' /> -->
+		<!-- Backbone App Here -->
+	</div>
+	
+
+	<!-- Templates -->
+	<script id="title-template" type="text/template">
+
+		<div class='grid'>
+			<div class='col col-1-2'>
+				<img src='./img/logo-placeholder.png' />
+			</div>
+			<div class='col col-1-2'>
+				<h2>
+					Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+				</h2>
+			</div>
+		</div>
+
+	</script>
+
+	<script id="floorplan-template" type="text/template">
+		
+		<h2>Floor Plan</h2>
+
+	</script>
+
+	<script id="twitter-sentiment-template" type="text/template">
+			
+		<div class='title-block'>
+			<h2 class='title'>
+				<span class='fill pink'>Twitter</span>
+				The Sentiment in King's Cross today is <span class='underline positive'>Positive</span> 
+			</h2>
+			<ul class='sentiment-emotions-chart'>
+				<p class='axis-label left'>Unlikely</p>
+				<p class='axis-label right'>Likely</p>
+				<% _.each([1,2,3,4,5],function(d,i){ %>
+					<li>
+						<div class='centered-horizontal-bar' >
+							<h2 class='label center'>Anger</h2>
+							<div class='bar negative'>
+								<span style='width:20%;'></span>
+							</div>
+							<div class='bar positive'>
+								<span style='width:30%;'></span>
+							</div>
+						</div>
+					</li>
+				<% }) %>
+				
+			</ul>
+		</div>
+		
+		
+	</script>
+
+
+	<!-- Plugins -->
+	<script type="text/javascript" src="/js/bower_components/jquery/dist/jquery.js"></script>
+	<script type="text/javascript" src="/js/bower_components/underscore/underscore.js"></script>
+	<script type="text/javascript" src="/js/bower_components/backbone/backbone.js"></script>
+	<script type="text/javascript" src="/js/bower_components/gsap/src/minified/TweenMax.min.js"></script>
+	<script type="text/javascript" src="/js/bower_components/moment/moment.js"></script>
+	<script type="text/javascript" src="/js/bower_components/d3/d3.js"></script>
+	<script type="text/javascript" src="/js/plugins/d3-extension.js"></script>
+
+	<!-- Backbone -->
+	<script type="text/javascript" src="/js/app.js"></script>
+	<script type="text/javascript" src="/js/router.js"></script>
+
+	<!-- Views -->
+	<script type="text/javascript" src="/js/views/title.js"></script>
+	<script type="text/javascript" src="/js/views/floorplan.js"></script>
+	<script type="text/javascript" src="/js/views/twitterSentiment.js"></script>
+
+	
+	
+	<!-- Start -->
+	<script type="text/javascript">App.Init();</script>
+
+
+</body>
+</html>

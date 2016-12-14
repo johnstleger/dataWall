@@ -1,0 +1,98 @@
+*
+	margin 0
+	border none
+	padding 0
+	box-sizing border-box
+
+// css reset
+@import "styl/reset.styl"
+@import "styl/fonts.styl"
+
+// mixins and general
+@import "styl/colors.styl"
+@import "styl/mixins.styl"
+@import "styl/general.styl"
+@import "styl/grid.styl"
+
+// modules
+@import "styl/animations.styl"
+@import "styl/charts.styl"
+
+
+
+
+
+body
+	background-color #000
+	#backbone-app
+		transform translate3d(0, 0, 0)
+		backface-visibility hidden
+		perspective 1000
+		position fixed
+		top 0
+		left 0
+		background-color $bg
+		width 1920px
+		height 1080px
+		overflow hidden
+		display block
+		&.loading
+			background-position center
+			background-size 99px 99px
+			background-image url(/img/loading.gif)
+			background-repeat no-repeat
+
+		.guide
+			width 100%
+			height auto
+			position absolute
+			top 0
+			left 0
+			z-index 2
+			opacity 1
+			pointer-events none
+
+		.view
+			width calc(100% - 250px)
+			height calc(100% - 250px)
+			margin 50px
+			border 2px solid rgba(255,255,255,0.02)
+			position absolute
+			top 0
+			bottom 0
+			left 0 
+			right 0
+			margin auto 
+
+			.title-block
+				.title
+					line-height 80px
+					height 80px
+					span.fill
+						line-height inherit
+						height inherit
+						background-color red
+						display inline-block
+						padding 0 20px 0 20px
+						margin-right 20px
+						&.pink
+							background-color #ff275b
+
+					span.underline
+						line-height inherit
+						height inherit
+						position relative
+						display inline-block
+						&:after
+							 content ''
+							 display block
+							 height 3px
+							 width 100%
+							 background-color red
+							 position absolute
+							 bottom 5px
+							 left 0
+						&.positive:after
+							background-color $teal
+						&.negative:after
+							background-color $pink

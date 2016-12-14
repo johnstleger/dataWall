@@ -1,18 +1,54 @@
-const router = require('express').Router(); // http://stackoverflow.com/questions/25260818/rest-with-express-js-nested-router
+// stackoverflow.com/questions/25260818/rest-with-express-js-nested-router
+const router = require('express').Router(); 
 
-// app.get('/api',(req,res)=>{
-// 	Promise.all([
-// 		db.getCollection('IntentDemographicsAge'),
-// 		db.getCollection('IntentGeography'),
-// 	]).then((data)=>{
-// 		let [ IntentDemographicsAge, IntentGeography ] = data;
-// 		res.send({ IntentDemographicsAge, IntentGeography });
-// 	});		
+
+
+let tfl = require('../data/tfl.js');
+router.use('/tube',(req,res)=>{ 
+	tfl.getTubeStatus().then((d)=>{ res.send(d); });
+});
+router.use('/trains',(req,res)=>{ 
+	tfl.getTrainsInOut().then((d)=>{ res.send(d); });
+});
+router.use('/bike',(req,res)=>{ 
+	tfl.getBarclaysBike().then((d)=>{ res.send(d); });
+});
+
+
+
+
+let uber = require('../data/uber.js');
+router.use('/uber',(req,res)=>{ 
+	uber.getEstimate().then((d)=>{ res.send(d); });
+});
+
+
+
+
+let twitter = require('../data/twitter.js');
+router.use('/twitter_kingscross',(req,res)=>{
+	twitter.getKingsCross().then((d)=>{ res.send(d); });
+});
+router.use('/twitter_agencies',(req,res)=>{
+	twitter.getHKXAgencies().then((d)=>{ res.send(d); });
+});
+
+
+
+
+let meetup = require('../data/meetup.js');
+router.use('/meetup',(req,res)=>{
+	meetup.getTopics().then((d)=>{ res.send(d); });
+});
+
+
+
+
+// let googleTrends = require('google-trends-api');
+// router.use('/googleTrends',(req,res)=>{
+// 	// Havas,Publicis,Omnicom,WPP
+// 	googleTrends.trendData(['Havas']).then((d)=>{ res.send(d); });
 // });
-
-
-
-
 
 
 
@@ -24,35 +60,12 @@ const router = require('express').Router(); // http://stackoverflow.com/question
 // });
 
 
-// Google Trends --
-// router.use('/googleTrends',(req,res)=>{
-// 	let googleTrends = require('google-trends-api');
-// 		googleTrends.trendData(['Havas','Publicis','Omnicom','WPP']).then((d)=>{ res.send(d); });
-// });
-
-
-// Rail --
-// router.use('/rail',(req,res)=>{ 
-// 	res.send('Rail Data'); 
-// });
-
-
-// Underground --
-// router.use('/tube',(req,res)=>{ 
-// 	res.send('Tube Data'); 
-// });
-
-
-// Uber --
-// router.use('/uber',(req,res)=>{ 
-// 	res.send('Uber Data'); 
-// });
-
-
-
-router.use('/twitter',(req,res)=>{
-	let twitter = require('../data/twitter.js');
-		twitter.getHKXAgencies().then((d)=>{ res.send(d); });
-});
 
 module.exports = router;
+
+
+
+
+
+
+

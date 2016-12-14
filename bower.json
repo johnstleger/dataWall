@@ -1,0 +1,29 @@
+{
+  "name": "itv-election",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "John St Leger"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client/js/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "fastclick": "^1.0.6",
+    "backbone": "^1.3.3",
+    "underscore": "^1.8.3",
+    "d3": "^4.2.8",
+    "gsap": "^1.19.0",
+    "moment": "^2.15.2",
+    "bootstrap": "^3.3.7"
+  }
+}
