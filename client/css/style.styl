@@ -42,6 +42,26 @@ body
 			background-image url(/img/loading.gif)
 			background-repeat no-repeat
 
+
+		.transition-wipe
+			position fixed
+			top 0
+			left 0
+			display block
+			width 100%
+			height 100%
+			opacity 1
+			z-index 50
+			&.blue
+				background-color $blue
+			&.teal
+				background-color $teal
+			&.pink
+				background-color $pink
+			&.orange
+				background-color $orange
+
+
 		.guide
 			width 100%
 			height auto
@@ -63,6 +83,10 @@ body
 			left 0 
 			right 0
 			margin auto 
+			transform translate3d(0,0,0.1)
+			backface-visibility hidden
+			perspective 1000
+
 
 			.title-block
 				.title
@@ -86,7 +110,7 @@ body
 						&:after
 							 content ''
 							 display block
-							 height 3px
+							 height 6px
 							 width 100%
 							 background-color red
 							 position absolute
@@ -96,3 +120,22 @@ body
 							background-color $teal
 						&.negative:after
 							background-color $pink
+
+
+
+.kings-cross-tweets
+	width 100%
+	height 100%
+	position absolute
+	li
+		position absolute
+		top 0
+		bottom 0
+		left 0
+		right 0
+		margin auto
+		height 500px
+		transform translate(-50%,-50%)
+		width 1000px
+		padding-left 40px
+		border-left 10px solid green

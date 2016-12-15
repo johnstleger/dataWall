@@ -20,7 +20,11 @@ exports.getHKXAgencies = function(){
 		
 		client.get('/users/lookup', params,(err, data, response)=>{
 			
-			if(err) return console.log(error);
+			if(err){
+				console.log(err);
+				fulfill({})
+				return;
+			}
 			
 			let prep = {
 				time: new Date(),
@@ -50,7 +54,6 @@ exports.getHKXAgencies = function(){
 	});
 };
 
-
 exports.getKingsCross = function(){
 	return new Promise((fulfill,reject)=>{
 		let params = {
@@ -60,22 +63,27 @@ exports.getKingsCross = function(){
 			count:30
 		};
 		client.get('search/tweets', params,(err, data, response)=>{
-			if(err) return console.log(error);
+			
+			if(err){ console.log(err); fulfill({}); return; }
+
 			data.tweetsConcat = _.map(data.statuses, (d,i)=>{ return d.text; }).join('. ');
 
-			async.eachSeries(data.statuses.slice(0,1), function loop(item, callback) {
+			async.eachSeries(data.statuses.slice(0,0), function loop(item, callback) {
 
 				// Get sentiment for each tweet -
 			    alchemy.get(item.text,'doc-sentiment').then((response)=>{
 					item.alchemy = response;
 					callback(data);
 				});
+
 			}, function done(){
-				// Get Sentiment and emotions for all tweets
+
+				// Get Sentiment and emotions for all tweets -
 			    alchemy.get(data.tweetsConcat,'doc-sentiment,doc-emotion').then((response)=>{
 					data.alchemy = response;
 					fulfill(data);
 				});
+
 			});
 		});
 	});

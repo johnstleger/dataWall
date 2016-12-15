@@ -4,11 +4,14 @@
 	App.Vent = _.extend({},Backbone.Events);
 	App.View = {};
 	App.Helper = {};
+	App.Stage = {};
 	App.Init = function(){
-		//$.getJSON('./api', function( data ) {
-			// 	App.Data = data;
-			// 	App.R = new App.Router();
-		// }); 
+		function setStage(){
+			App.Stage.Width = $(window).width();
+			App.Stage.Height = $(window).height();
+		};
+		$(window).on("debouncedresize", setStage);
+		setStage();
 		App.R = new App.Router();
 	}
 })();

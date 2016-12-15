@@ -11,8 +11,6 @@
 		initialize:function(){
 			self = this;
 			Backbone.history.start();
-			App.$el.removeClass('loading');
-			console.log('App Loaded : ', App.Data);
 		},
 		sectionDestroy:function(done){
 			if(!self.section) return done();

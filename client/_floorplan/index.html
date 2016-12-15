@@ -12,29 +12,37 @@
 	<div id='backbone-app' class='loading'></div>
 
 	<script id="template" type="text/template">
-		<div class='title-block'>
-			<h2 class='title'>
-				<span class='fill pink'>Twitter</span>
-				The Sentiment in King's Cross today is <span class='underline positive'>Positive</span> 
-			</h2>
+			
+		<div class='transition-wipe pink'></div>
+
+		<div class='view'>
+
+			<div class='title-block'>
+				<h2 class='title'>
+					<span class='fill pink'>Twitter</span>
+					The Sentiment in King's Cross today is <span class='underline positive'>Positive</span> 
+				</h2>
+			</div>
+			<ul class='sentiment-emotions-chart'>
+				<p class='axis-label left'>Unlikely</p>
+				<p class='axis-label right'>Likely</p>
+				<% _.each([1,2,3,4,5],function(d,i){ %>
+					<li>
+						<div class='centered-horizontal-bar' >
+							<h2 class='label center'>Anger</h2>
+							<div class='bar negative'>
+								<span style='width:20%;'></span>
+							</div>
+							<div class='bar positive'>
+								<span style='width:3%;'></span>
+							</div>
+						</div>
+					</li>
+				<% }) %>
+			</ul>
+
 		</div>
-		<ul class='sentiment-emotions-chart'>
-			<p class='axis-label left'>Unlikely</p>
-			<p class='axis-label right'>Likely</p>
-			<% _.each([1,2,3,4,5],function(d,i){ %>
-				<li>
-					<div class='centered-horizontal-bar' >
-						<h2 class='label center'>Anger</h2>
-						<div class='bar negative'>
-							<span style='width:20%;'></span>
-						</div>
-						<div class='bar positive'>
-							<span style='width:30%;'></span>
-						</div>
-					</div>
-				</li>
-			<% }) %>
-		</ul>
+
 	</script>
 
 	<!-- Plugins -->
@@ -51,8 +59,8 @@
 			
 
 			var TheView = Backbone.View.extend({
-				id:'view',
-				className:'view',
+				// id:'view',
+				// className:'view',
 				playhead:0,
 			    initialize:function(data){
 			    	var self = this;
@@ -69,6 +77,17 @@
 
 			    	self.$el.html(self.template(self.data));
 
+			    	var wipe = self.$el.find(".transition-wipe");
+
+
+
+
+
+
+
+
+
+
 		    		// Init GSAP ---
 		    		var base = self.$el;
 		    		var animated_bar = self.$el.find(".bar span");
@@ -77,12 +96,14 @@
 		    	
 		    		self.timeline = new TimelineMax({ paused:true });		
 					self.timeline
-						.set(base, { scaleX:1.1, scaleY:1.1, opacity:0, immediateRender:true })
+						.set(wipe, { width:0, immediateRender:true })
+						.set(base, { opacity:0, immediateRender:true })
 						.set(animated_bar_negative, { opacity:0, x:300, immediateRender:true })
 						.set(animated_bar_positive, { opacity:0, x:-300, immediateRender:true })
 
 						.addPause(0.3)
-						.to(base, 0.5, { scaleX:1, scaleY:1, opacity:1 })
+						.to(wipe, 0.5, { width:100 })
+						.to(base, 0.5, { opacity:1 })
 						.staggerTo(animated_bar, 1, { opacity:1, x:0 }, 0.1, '-=0.1')
 						.addLabel('scene1');
 

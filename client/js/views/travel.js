@@ -1,25 +1,18 @@
 (function(){
 
-
-
-	
-
-
-
-
-	App.View.TwitterSentimentView = Backbone.View.extend({
-		id:'TwitterSentimentView',
+	App.View.TravelView = Backbone.View.extend({
+		id:'TravelView',
 		className:'',
 	    initialize:function(){
 	    	var self = this;
 	    	self.playhead = 0;
-			self.template = _.template($("#twitter-sentiment-template").html());
+			self.template = _.template($("#travel-template").html());
 			
-			$.getJSON('./api2/twitter', function( data ) {
-				console.log(data);
-				self.dataPrep(data)
+			// $.getJSON('./api2/twitter', function( data ) {
+			// 	console.log(data);
+			// 	self.dataPrep(data)
 				self.render();
-			});			
+			// });			
 	    },
 	    dataPrep:function(data){
 	    	var self = this;
@@ -60,14 +53,14 @@
 				s2.tweets = s2.base.find('.kings-cross-tweets li');
 
 				TweenMax.set(s2.base, { opacity:0 });
-				TweenMax.set(s2.tweets,{ y: 100, opacity: 0 });
+				TweenMax.set(s2.tweets,{ y: 300, opacity: 0 });
 
 				tl.to(s2.base, 0.5, { y:0, opacity:1 }, '+=1');
 				tl.set({}, {}, "+=2")
 
 				_.each(s2.tweets, function($s2_tweet,i){
-					tl.to($s2_tweet, 0.8, { y: 0, opacity: 1 }, '-=0.3')
-				      .to($s2_tweet, 0.8, { y: -100, opacity: 0 }, '+=0.5');
+					tl.to($s2_tweet, 0.8, { y: 0, opacity: 1 }, '-=0.5')
+				      .to($s2_tweet, 0.8, { y: -300, opacity: 0 }, '+=0.5');
 				});
 
 				tl.addLabel('scene2');
@@ -80,22 +73,20 @@
 	    	var self = this;
 
 	    	self.$el.html(self.template({	
-		    	emotion:[
-		    		{label:'Anger',positive:'20',negative:'0'},
-		    		{label:'Disgust',positive:'0',negative:'30'},
-		    		{label:'Fear',positive:'0',negative:'40'},
-		    		{label:'Joy',positive:'70',negative:'0'},
-		    		{label:'Saddness',positive:'0',negative:'30'}
-		    	],
-		    	tweets:self.data.TwitterKingsCross.statuses.slice(0,4)
+		    	// emotion:[
+		    	// 	{label:'Anger',positive:'20',negative:'0'},
+		    	// 	{label:'Disgust',positive:'0',negative:'30'},
+		    	// 	{label:'Fear',positive:'0',negative:'40'},
+		    	// 	{label:'Joy',positive:'70',negative:'0'},
+		    	// 	{label:'Saddness',positive:'0',negative:'30'}
+		    	// ],
+		    	// tweets:self.data.TwitterKingsCross.statuses.slice(0,4)
 		    }));
 
-	    	self.initAnimation();
+	    	// self.initAnimation();
 			App.$el.append(self.$el);
-			if('Animation' in self){ self.Animation.play(); }
+			// if('Animation' in self){ self.Animation.play(); }
 			
-
-
 	    },
 	    destroy:function(callback){
 	    	self.$el.fadeOut(200, function(){
