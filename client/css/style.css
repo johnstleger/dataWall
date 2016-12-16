@@ -673,6 +673,7 @@ html {
   width: calc(50% - 5px);
   float: left;
   height: 25px;
+  height: 2vh;
   display: block;
   background-color: #1e1e3e;
   position: relative;
@@ -722,6 +723,60 @@ html {
   right: 0;
   left: auto;
   background-color: #ff275b;
+}
+.horizontal-bar:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+.horizontal-bar .bar {
+  width: 100%;
+  float: left;
+  height: 25px;
+  display: block;
+  background-color: #1e1e3e;
+  position: relative;
+  overflow: hidden;
+}
+.horizontal-bar .bar span {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background-color: #ff275b;
+  width: 0;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000;
+  -webkit-transition: all 1000ms cubic-bezier(0.615, 0.015, 0.44, 1);
+  -moz-transition: all 1000ms cubic-bezier(0.615, 0.015, 0.44, 1);
+  -ms-transition: all 1000ms cubic-bezier(0.615, 0.015, 0.44, 1);
+  -o-transition: all 1000ms cubic-bezier(0.615, 0.015, 0.44, 1);
+  transition: all 1000ms cubic-bezier(0.615, 0.015, 0.44, 1);
+}
+.center-block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.center-block:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.25em;
+}
+.center-block .center {
+  text-align: left;
+  display: inline-block;
+  vertical-align: middle;
+  width: 60%;
 }
 body {
   background-color: #000;
@@ -810,11 +865,15 @@ body #backbone-app .view {
   backface-visibility: hidden;
   perspective: 1000;
 }
-body #backbone-app .view .title-block .title {
+.stat-block {
+  padding-left: 30px;
+  border-left: 10px solid #f00;
+}
+.title-block .title {
   line-height: 80px;
   height: 80px;
 }
-body #backbone-app .view .title-block .title span.fill {
+.title-block .title span.fill {
   line-height: inherit;
   height: inherit;
   background-color: #f00;
@@ -822,16 +881,16 @@ body #backbone-app .view .title-block .title span.fill {
   padding: 0 20px 0 20px;
   margin-right: 20px;
 }
-body #backbone-app .view .title-block .title span.fill.pink {
+.title-block .title span.fill.pink {
   background-color: #ff275b;
 }
-body #backbone-app .view .title-block .title span.underline {
+.title-block .title span.underline {
   line-height: inherit;
   height: inherit;
   position: relative;
   display: inline-block;
 }
-body #backbone-app .view .title-block .title span.underline:after {
+.title-block .title span.underline:after {
   content: '';
   display: block;
   height: 6px;
@@ -841,31 +900,68 @@ body #backbone-app .view .title-block .title span.underline:after {
   bottom: 5px;
   left: 0;
 }
-body #backbone-app .view .title-block .title span.underline.positive:after {
+.title-block .title span.underline.positive:after {
   background-color: #0cc;
 }
-body #backbone-app .view .title-block .title span.underline.negative:after {
+.title-block .title span.underline.negative:after {
   background-color: #ff275b;
 }
-.kings-cross-tweets {
+.tweet-block-1 {
+  padding-left: 30px;
+  border-left: 10px solid #f00;
+}
+.grid-chart-block li {
+  width: calc(10% - 10px);
+  margin: 5px;
+  float: left;
+  height: 40px;
+  display: block;
+  background-color: #1e1e3e;
+}
+.grid-chart-block li i {
   width: 100%;
   height: 100%;
+  display: block;
   position: absolute;
 }
-.kings-cross-tweets li {
+ul.twitter-loop-block {
+  width: 100%;
+  height: 300px;
+  display: block;
+  position: relative;
+}
+ul.twitter-loop-block li {
   position: absolute;
   top: 0;
-  bottom: 0;
   left: 0;
-  right: 0;
-  margin: auto;
-  height: 500px;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  width: 1000px;
   padding-left: 40px;
   border-left: 10px solid #008000;
+}
+ul.twitter-loop-block li.negative {
+  border-left: 10px solid #ff275b;
+}
+ul.twitter-loop-block li.positive {
+  border-left: 10px solid #0cc;
+}
+ul.twitter-loop-block li.neutral {
+  border-left: 10px solid #008000;
+}
+ul.twitter-loop-block li .handle {
+  position: absolute;
+  line-height: 30px;
+  top: 0;
+  left: -70px;
+  -webkit-transform-origin: top left;
+  -moz-transform-origin: top left;
+  -ms-transform-origin: top left;
+  -o-transform-origin: top left;
+  transform-origin: top left;
+  width: auto;
+  height: auto;
+  text-align: right;
+  -webkit-transform: rotate(-90deg) translateX(-100%);
+  -moz-transform: rotate(-90deg) translateX(-100%);
+  -ms-transform: rotate(-90deg) translateX(-100%);
+  -o-transform: rotate(-90deg) translateX(-100%);
+  transform: rotate(-90deg) translateX(-100%);
 }

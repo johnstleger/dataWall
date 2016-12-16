@@ -20,7 +20,7 @@ db.connect((err)=>{
 	if(err) return console.log( 'No Mongo Connection ', err );
 	app.listen( appEnv.port, '0.0.0.0', ()=>{ 
 		console.log('Running ',appEnv.url); 
-		loop.run();
+		// loop.run();
 	});
 });
 

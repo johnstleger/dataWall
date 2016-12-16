@@ -6,6 +6,7 @@
 			"":"titleView",
 			"floorplan":"floorplanView",
 			"twitter-sentiment":"twitterSentimentView",
+			"transport":"transportView",
 			"*notFound": "notFound"
 		},
 		initialize:function(){
@@ -29,6 +30,11 @@
 		twitterSentimentView:function(){
 			self.sectionDestroy(function(){
 				self.section = new App.View.TwitterSentimentView();
+			});
+		},
+		transportView:function(){
+			self.sectionDestroy(function(){
+				self.section = new App.View.TransportView();
 			});
 		},
 		notFound:function(){

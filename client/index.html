@@ -21,39 +21,84 @@
 
 	<!-- Templates -->
 	<script id="title-template" type="text/template">
-
 		<div class='grid'>
 			<div class='col col-1-2'>
 				<img src='./img/logo-placeholder.png' />
 			</div>
 			<div class='col col-1-2'>
-				<h2>
+				<h2> 
 					Lorem Ipsum is simply dummy text of the printing and typesetting industry.
 				</h2>
 			</div>
 		</div>
-
 	</script>
 
-	<script id="floorplan-template" type="text/template">
-		
-		<h2>Floor Plan</h2>
 
+
+	<script id="floorplan-template" type="text/template">
+		<h2>Floor Plan</h2>
+	</script>
+
+	<script id="transport-template" type="text/template">
+		
+		<div class='view scene1'>
+			<div class='title-block'>
+				<h2 class='title'>
+					<span class='fill pink'>Transport</span> Travel
+				</h2>
+			</div>
+
+
+			<div class='grid'>
+				<div class='col col-1-2'>
+					<div class='tweet-block-1'>
+						<p>@handle</p>
+						<h2>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500.</h2>
+					</div>
+					<div>
+						<ul>
+							<li>Train1</li>
+							<li>Train1</li>
+							<li>Train1</li>
+						</ul>
+					</div>
+				</div>
+				<div class='col col-1-2'>
+					<div>
+						<h1>Barclays Bikes</h1>
+						<p>1km</p>
+						<div class='stat-block'>
+							<h1>17</h1>
+							<p>bikes</p>
+						</div>
+						<div class='stat-block'>
+							<h1>17</h1>
+							<p>bikes</p>
+						</div>
+						<ul class='grid-chart-block'>
+							<% _.each(new Array(50),(d,i)=>{ %>
+								<li><i></i></li>
+							<% }) %>
+						</ul>
+					</div>
+				</div>
+
+				
+
+
+			</div>
+		</div>
 	</script>
 
 	<script id="twitter-sentiment-template" type="text/template">
-
-		
-		<div class='transition-wipe pink'></div>
-
-		
+		<!-- <div class='transition-wipe pink'></div> -->
 		<div class='view scene1'>
 			<div class='title-block'>
 				<h2 class='title'>
 					<span class='fill pink'>Twitter</span>
 					The Sentiment in King's Cross today is <span class='underline positive'>Positive</span> 
 				</h2>
-			</div>
+			</div> 
 			<ul class='sentiment-emotions-chart'>
 				<p class='axis-label left'>Unlikely</p>
 				<p class='axis-label right'>Likely</p>
@@ -72,23 +117,31 @@
 				<% }) %>
 			</ul>
 		</div>
-
-		<div class='view scene2'>
+		<!-- <div class='view scene2'>
 			<div class='title-block'>
 				<h2 class='title'>
 					<span class='fill pink'>Twitter</span>
 					The Sentiment in King's Cross today is <span class='underline positive'>Positive</span> 
 				</h2>
 			</div>
-			<ul class='kings-cross-tweets' >
-				<% _.each(tweets,function(d,i){ %>
-					<li>
-						<h1><%= d.text %></h1>
-						<p><br/>@<%= d.user.screen_name %></p>
-					</li>
-				<% }) %>
-			</ul>
-		</div>
+			<div class='center-block'>
+				<div class='center'>
+					<ul class='twitter-loop-block'>
+						<% _.each(tweets,function(d,i){ %>
+							<li class='negative'>
+								<p class='handle'>@<%= d.user.screen_name %></p>
+								<h2><%= d.text %></h2><br/>
+								<% if('alchemy' in d){ %><% } %>
+								<div class='horizontal-bar' >
+									<p>negative</p><br/>
+									<div class='bar negative'> <span style='width:30%'></span> </div>
+								</div>
+							</li>
+						<% }) %>
+					</ul>
+				</div>
+			</div>
+		</div> -->
 	</script>
 
 
@@ -110,6 +163,7 @@
 	<script type="text/javascript" src="/js/views/title.js"></script>
 	<script type="text/javascript" src="/js/views/floorplan.js"></script>
 	<script type="text/javascript" src="/js/views/twitterSentiment.js"></script>
+	<script type="text/javascript" src="/js/views/transport.js"></script>
 
 	<!-- Start -->
 	<script type="text/javascript">App.Init();</script>

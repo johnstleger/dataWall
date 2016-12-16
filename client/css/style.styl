@@ -18,6 +18,8 @@
 @import "styl/animations.styl"
 @import "styl/charts.styl"
 
+@import "styl/center.styl"
+
 
 
 
@@ -36,6 +38,8 @@ body
 		height 1080px
 		overflow hidden
 		display block
+
+
 		&.loading
 			background-position center
 			background-size 99px 99px
@@ -88,54 +92,101 @@ body
 			perspective 1000
 
 
-			.title-block
-				.title
-					line-height 80px
-					height 80px
-					span.fill
-						line-height inherit
-						height inherit
-						background-color red
-						display inline-block
-						padding 0 20px 0 20px
-						margin-right 20px
-						&.pink
-							background-color #ff275b
-
-					span.underline
-						line-height inherit
-						height inherit
-						position relative
-						display inline-block
-						&:after
-							 content ''
-							 display block
-							 height 6px
-							 width 100%
-							 background-color red
-							 position absolute
-							 bottom 5px
-							 left 0
-						&.positive:after
-							background-color $teal
-						&.negative:after
-							background-color $pink
+			
 
 
 
-.kings-cross-tweets
+
+// General --
+
+.stat-block
+	padding-left 30px
+	border-left 10px solid red
+
+.title-block
+	.title
+		line-height 80px
+		height 80px
+		span.fill
+			line-height inherit
+			height inherit
+			background-color red
+			display inline-block
+			padding 0 20px 0 20px
+			margin-right 20px
+			&.pink
+				background-color #ff275b
+
+		span.underline
+			line-height inherit
+			height inherit
+			position relative
+			display inline-block
+			&:after
+				 content ''
+				 display block
+				 height 6px
+				 width 100%
+				 background-color red
+				 position absolute
+				 bottom 5px
+				 left 0
+			&.positive:after
+				background-color $teal
+			&.negative:after
+				background-color $pink
+
+.tweet-block-1
+	padding-left 30px
+	border-left 10px solid red
+
+
+
+
+
+
+
+
+// Blocks --
+.grid-chart-block
+	li
+		width calc(10% - 10px)
+		margin 5px
+		float left
+		height 40px
+		display block
+		background-color $bg_light
+		i
+			width 100%
+			height 100%
+			display block
+			position absolute
+
+
+ul.twitter-loop-block
 	width 100%
-	height 100%
-	position absolute
+	height 300px
+	display block
+	position relative
 	li
 		position absolute
 		top 0
-		bottom 0
 		left 0
-		right 0
-		margin auto
-		height 500px
-		transform translate(-50%,-50%)
-		width 1000px
 		padding-left 40px
 		border-left 10px solid green
+		&.negative
+			border-left 10px solid $pink
+		&.positive
+			border-left 10px solid $teal
+		&.neutral
+			border-left 10px solid green
+		.handle
+			position absolute
+			line-height 30px
+			top 0
+			left -70px
+			transform-origin top left
+			width auto
+			height auto
+			text-align right
+			transform rotate(-90deg) translateX(-100%)

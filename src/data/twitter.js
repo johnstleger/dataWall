@@ -22,7 +22,7 @@ exports.getHKXAgencies = function(){
 			
 			if(err){
 				console.log(err);
-				fulfill({})
+				fulfill({});
 				return;
 			}
 			
@@ -68,7 +68,7 @@ exports.getKingsCross = function(){
 
 			data.tweetsConcat = _.map(data.statuses, (d,i)=>{ return d.text; }).join('. ');
 
-			async.eachSeries(data.statuses.slice(0,0), function loop(item, callback) {
+			async.eachSeries(data.statuses, function loop(item, callback) {
 
 				// Get sentiment for each tweet -
 			    alchemy.get(item.text,'doc-sentiment').then((response)=>{

@@ -1,5 +1,5 @@
-const min = 1,
-	  interval = min*60*1000;
+// const min = 1,
+// 	  interval = min*60*1000;
 
 const twitter = require('./data/twitter.js'),
 	  db = require('./db');
