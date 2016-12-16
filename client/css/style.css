@@ -169,8 +169,10 @@ body label,
 body input,
 body button,
 body strong,
-body li {
-  -moz-osx-font-smoothing: grayscale;
+body li,
+body table,
+body td,
+body -moz-osx-font-smoothing grayscale {
   -webkit-font-smoothing: antialiased;
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
@@ -183,6 +185,8 @@ body li {
 body h1 {
   font-size: 55px;
   line-height: 85px;
+  font-size: 5vh;
+  line-height: 5.4vh;
   font-weight: 400;
   font-family: 'Droid Sans';
   font-family: 'Montserrat';
@@ -190,6 +194,8 @@ body h1 {
 body h2 {
   font-size: 45px;
   line-height: 65px;
+  font-size: 4vh;
+  line-height: 4.4vh;
   font-weight: 400;
   font-family: 'Droid Sans';
   font-family: 'Montserrat';
@@ -199,6 +205,8 @@ body p,
 body li {
   font-size: 37px;
   line-height: 47px;
+  font-size: 3vh;
+  line-height: 3.4vh;
   font-weight: 400;
   font-family: 'Droid Sans';
   font-family: 'Montserrat';
@@ -266,22 +274,15 @@ html {
 .grid .col {
   width: 100%;
   float: left;
-  min-height: 100px;
+  min-height: 5px;
   height: auto;
   display: block;
 }
-.grid .col.no-min-height {
-  min-height: 5px;
+.grid .col.pad-right {
+  padding-right: 15vh;
 }
-@media screen and (max-width: 1150px) {
-  .grid .col {
-    min-height: 70px;
-  }
-}
-@media screen and (max-width: 600px) {
-  .grid .col {
-    min-height: 50px;
-  }
+.grid .col.pad-left {
+  padding-right: 15vh;
 }
 .grid .col.col-2-3 {
   width: 66.66%;
@@ -629,8 +630,8 @@ html {
   }
 }
 .sentiment-emotions-chart {
-  margin: 45px 0;
   position: relative;
+  margin-top: 7vh;
 }
 .sentiment-emotions-chart .axis-label {
   position: absolute;
@@ -656,6 +657,7 @@ html {
 .sentiment-emotions-chart .centered-horizontal-bar {
   width: 80%;
   margin: 30px auto;
+  margin: 4vh auto;
   height: auto;
   display: block;
 }
@@ -732,7 +734,7 @@ html {
 .horizontal-bar .bar {
   width: 100%;
   float: left;
-  height: 25px;
+  height: 2vh;
   display: block;
   background-color: #1e1e3e;
   position: relative;
@@ -779,9 +781,10 @@ html {
   width: 60%;
 }
 body {
-  background-color: #000;
+  background-color: #f00;
 }
 body #backbone-app {
+  width: 100%;
   -webkit-transform: translate3d(0, 0, 0);
   -moz-transform: translate3d(0, 0, 0);
   -ms-transform: translate3d(0, 0, 0);
@@ -793,10 +796,11 @@ body #backbone-app {
   top: 0;
   left: 0;
   background-color: #050028;
-  width: 1920px;
-  height: 1080px;
-  overflow: hidden;
+}
+body #backbone-app:after {
+  padding-top: 56.25% /* 16:9 ratio */;
   display: block;
+  content: '';
 }
 body #backbone-app.loading {
   background-position: center;
@@ -847,8 +851,8 @@ body #backbone-app .guide {
   pointer-events: none;
 }
 body #backbone-app .view {
-  width: calc(100% - 250px);
-  height: calc(100% - 250px);
+  width: calc(100% - 20vh);
+  height: calc(100% - 20vh);
   margin: 50px;
   border: 2px solid rgba(255,255,255,0.02);
   position: absolute;
@@ -866,19 +870,18 @@ body #backbone-app .view {
   perspective: 1000;
 }
 .stat-block {
-  padding-left: 30px;
-  border-left: 10px solid #f00;
+  padding-left: 3vh;
+  border-left: 0.7vh solid #f00;
 }
 .title-block .title {
-  line-height: 80px;
-  height: 80px;
+  line-height: 8vh;
 }
 .title-block .title span.fill {
   line-height: inherit;
   height: inherit;
   background-color: #f00;
   display: inline-block;
-  padding: 0 20px 0 20px;
+  padding: 0 3vh 0 3vh;
   margin-right: 20px;
 }
 .title-block .title span.fill.pink {
@@ -893,11 +896,11 @@ body #backbone-app .view {
 .title-block .title span.underline:after {
   content: '';
   display: block;
-  height: 6px;
+  height: 0.7vh;
   width: 100%;
   background-color: #f00;
   position: absolute;
-  bottom: 5px;
+  bottom: 0.3vh;
   left: 0;
 }
 .title-block .title span.underline.positive:after {
@@ -906,17 +909,26 @@ body #backbone-app .view {
 .title-block .title span.underline.negative:after {
   background-color: #ff275b;
 }
-.tweet-block-1 {
-  padding-left: 30px;
-  border-left: 10px solid #f00;
+.map-block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 .grid-chart-block li {
-  width: calc(10% - 10px);
-  margin: 5px;
+  width: calc(10% - 1vh);
+  margin-top: 1vh;
+  margin-right: 1vh;
   float: left;
-  height: 40px;
+  height: auto;
   display: block;
   background-color: #1e1e3e;
+}
+.grid-chart-block li:after {
+  content: '';
+  display: block;
+  padding-top: 50%;
 }
 .grid-chart-block li i {
   width: 100%;
@@ -924,33 +936,60 @@ body #backbone-app .view {
   display: block;
   position: absolute;
 }
+table.train-table-block {
+  color: #fff;
+  width: 100%;
+}
+table.train-table-block tr {
+  border-bottom: 0.5vh solid #050028;
+}
+table.train-table-block tr td {
+  padding: 10px 20px;
+  width: 50%;
+  border-left: 0.5vh solid #050028;
+  background-color: #1e1e3e;
+}
+table.train-table-block tr td:first-child {
+  width: 25%;
+}
 ul.twitter-loop-block {
   width: 100%;
-  height: 300px;
+  height: 36vh;
   display: block;
   position: relative;
+  margin: 3vh 0;
 }
 ul.twitter-loop-block li {
   position: absolute;
   top: 0;
   left: 0;
-  padding-left: 40px;
-  border-left: 10px solid #008000;
 }
-ul.twitter-loop-block li.negative {
-  border-left: 10px solid #ff275b;
+ul.twitter-loop-block li div.tweet-block-2 .handle {
+  color: #ff275b;
+  margin-bottom: 10px;
 }
-ul.twitter-loop-block li.positive {
-  border-left: 10px solid #0cc;
+ul.twitter-loop-block li div.tweet-block-2 .text {
+  padding-left: 3vh;
+  border-left: 0.7vh solid #ff275b;
 }
-ul.twitter-loop-block li.neutral {
-  border-left: 10px solid #008000;
+ul.twitter-loop-block li div.tweet-block-1 {
+  padding-left: 6vh;
+  border-left: 0.7vh solid #1e1e3e;
 }
-ul.twitter-loop-block li .handle {
+ul.twitter-loop-block li div.tweet-block-1.negative {
+  border-left: 0.7vh solid #ff275b;
+}
+ul.twitter-loop-block li div.tweet-block-1.positive {
+  border-left: 0.7vh solid #0cc;
+}
+ul.twitter-loop-block li div.tweet-block-1.neutral {
+  border-left: 0.7vh solid #008000;
+}
+ul.twitter-loop-block li div.tweet-block-1 .handle {
   position: absolute;
   line-height: 30px;
   top: 0;
-  left: -70px;
+  left: -11vh;
   -webkit-transform-origin: top left;
   -moz-transform-origin: top left;
   -ms-transform-origin: top left;

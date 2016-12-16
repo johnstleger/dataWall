@@ -5,87 +5,71 @@
 		className:'',
 	    initialize:function(){
 	    	var self = this;
-	    	self.playhead = 0;
+	    	self.Vent = _.extend({},Backbone.Events);
 			self.template = _.template($("#transport-template").html());
-			
-			// $.getJSON('./api2/twitter', function( data ) {
-			// 	console.log(data);
-			// 	self.dataPrep(data)
+			getData(function(data){
+				self.data=data;
 				self.render();
-			// });			
+			});	
 	    },
-	    dataPrep:function(data){
+	    events:{
+	    	click:'dataUpdate'
+	    },
+	    dataUpdate:function(){
 	    	var self = this;
-	    		self.data = data;	
+	    	App.LoadingTransition.tweenTo('active'); 
+	    	setTimeout(function(){
+	    		self.render();
+	    		App.LoadingTransition.tweenTo('complete'); 
+	    	},500);
+
 	    },
 	    initAnimation:function(){
 
-	    	// GSAP - MASTER TIMELINE
 	    	var self = this;
-    		var tl = new TimelineMax({ onComplete:function(){ this.restart(); }});		
-				
-    		// SCENE 1 ----
+
+	    	// Looping Animations
+	    	var tweetsLoop = {};
+				tweetsLoop.$tweets = self.$(".twitter-loop-block li");
+	   			tweetsLoop.Tl = new TimelineMax({onComplete:function() { this.restart(); }});
+	   			TweenMax.set(tweetsLoop.$tweets, { y: 100, opacity: 0 });
+				_.each(tweetsLoop.$tweets, function($tweetsLoop_tweet,i){
+					tweetsLoop.Tl
+					  .to($tweetsLoop_tweet, 0.5, { y: 0, opacity: 1 }, '-=0.3')	
+				      .to($tweetsLoop_tweet, 0.5, { y: -100, opacity: 0 }, '+=3.5')
+				});
+				tweetsLoop.Tl.play();
+
+
+
+	    	// Main Animations'
+    		var tl = new TimelineMax({ onComplete:function(){ this.restart(); } });		
+    		// Scene1
 			var s1 = {};
-    			s1.wipe = self.$('.transition-wipe');
     			s1.base = self.$('.scene1');
-    			s1.animated_bar_container = s1.base.find(".sentiment-emotions-chart li");
-    			s1.animated_bar = s1.base.find(".bar span");
-    			s1.animated_bar_negative = s1.base.find(".bar.negative span");
-    			s1.animated_bar_positive = s1.base.find(".bar.positive span");
+    			s1.blocks = self.$('.ani-block');
 
-    			TweenMax.set(s1.wipe, { x:-App.Stage.Width });
-				TweenMax.set(s1.base, { opacity:0 });
-				TweenMax.set(s1.animated_bar_negative, { opacity:0, x:300 });
-				TweenMax.set(s1.animated_bar_positive, { opacity:0, x:-300 });
+				TweenMax.set( s1.base, { opacity:0 });
+				TweenMax.set( s1.blocks, { y:100, opacity:0 });
 
-				tl.to(s1.wipe, 1, { x:0 })
-				  .to(s1.wipe, 1, { x: App.Stage.Width })
-				  .to(s1.base, 0.5, { opacity:1 }, '-=0.5')
-				  .staggerTo(s1.animated_bar, 1, { opacity:1, x:0 }, 0.1, '-=1')
-				  .staggerTo(s1.animated_bar_container, 1, { opacity:0, y:250 }, 0.05, '+=4')
-				  .to(s1.base, 0.5, { opacity:0 }, '-=1')
+				tl.to(s1.base, 0.5, { opacity:1 })
+				  .staggerTo( s1.blocks, 0.5, { y:0, opacity:1 },0.1, '+=0.5')
+				  .set({}, {}, "+=1.5")
+				  .staggerTo( s1.blocks, 0.5, { y:-100, opacity:0 },0.1, '+=0.5')
 				  .addLabel('scene1');
 
+			return tl;
 
-			// SCENE 2 ----
-			var s2 = {};
-				s2.base = self.$('.scene2');
-				s2.tweets = s2.base.find('.kings-cross-tweets li');
-
-				TweenMax.set(s2.base, { opacity:0 });
-				TweenMax.set(s2.tweets,{ y: 300, opacity: 0 });
-
-				tl.to(s2.base, 0.5, { y:0, opacity:1 }, '+=1');
-				tl.set({}, {}, "+=1")
-
-				_.each(s2.tweets, function($s2_tweet,i){
-					tl.to($s2_tweet, 0.8, { y: 0, opacity: 1,ease: Power1.easeIn }, '-=0.5')
-				      .to($s2_tweet, 0.8, { y: -300, opacity: 0,ease: Power1.easeOut }, '+=0.5');
-				});
-
-				tl.addLabel('scene2');
-
-
-			self.Animation = tl;
 	    },
 	    render:function(){
 
 	    	var self = this;
 
-	    	self.$el.html(self.template({	
-		    	// emotion:[
-		    	// 	{label:'Anger',positive:'20',negative:'0'},
-		    	// 	{label:'Disgust',positive:'0',negative:'30'},
-		    	// 	{label:'Fear',positive:'0',negative:'40'},
-		    	// 	{label:'Joy',positive:'70',negative:'0'},
-		    	// 	{label:'Saddness',positive:'0',negative:'30'}
-		    	// ],
-		    	// tweets:self.data.TwitterKingsCross.statuses.slice(0,4)
-		    }));
+	    	self.$el.html(self.template(self.data));
 
-	    	// self.initAnimation();
+	    	self.Animation = self.initAnimation();
 			App.$el.append(self.$el);
-			// if('Animation' in self){ self.Animation.play(); }
+			if('Animation' in self){ self.Animation.play(); }
 			
 	    },
 	    destroy:function(callback){
@@ -100,4 +84,75 @@
 			});
 		}
 	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	function getData(callback){
+		callback({
+			tfl:{
+	    		lastUpdated:new Date(),
+	    		tweets:[
+	    			{
+		    			text:'Alteration to the 09:20 London Liverpool Street to Shenfield due 10:03 due to a late running train.',
+		    			handle:'@tfl',
+		    			date:new Date()
+		    		},
+		    		{
+		    			text:'Alteration to the 09:20 London Liverpool Street to Shenfield due 10:03 due to a late running train.',
+		    			handle:'@tfl',
+		    			date:new Date()
+		    		}
+	    		]
+	    	},
+	    	bike:{
+	    		lastUpdated:new Date(),
+	    		bikesCount:20,
+	    		spacesCount:40,
+	    		stations:[
+	    			{
+	    				name:'street 1',
+	    				geo:{ lat:0,lon:0 },
+	    				bikesCount:20,
+	    				spacesCount:40
+	    			},
+	    			{
+	    				name:'street 1',
+	    				geo:{ lat:0,lon:0 },
+	    				bikesCount:20,
+	    				spacesCount:40
+	    			}
+	    		]
+	    	},
+	    	uber:{
+	    		lastUpdated:new Date(),
+	    		approx:'10mins'
+	    	}
+		});
+	}
+
 })();

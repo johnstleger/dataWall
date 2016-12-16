@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
 	<title> Havas | Data Wall </title>
-
 	<meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/> <!-- ie fix -->
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" name="viewport"/>
 	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/css/style.css"/>
-
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgktFOsilQgDvScgjEyOST_EGHM5WwAUs" type="text/javascript"></script>
 </head>
 <body>	
 
 	<div id='backbone-app' class='loading'>
+		<div class='transition-wipe pink'></div>
 		<!-- <img class='guide' src='/img/guide.png' /> -->
 		<!-- Backbone App Here -->
 	</div>
@@ -47,33 +46,54 @@
 					<span class='fill pink'>Transport</span> Travel
 				</h2>
 			</div>
-
-
 			<div class='grid'>
-				<div class='col col-1-2'>
-					<div class='tweet-block-1'>
-						<p>@handle</p>
-						<h2>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500.</h2>
-					</div>
-					<div>
-						<ul>
-							<li>Train1</li>
-							<li>Train1</li>
-							<li>Train1</li>
+				<div class='col col-1-2 pad-right'>
+					<div class='ani-block'>
+						<ul class='twitter-loop-block'>
+						<% _.each(new Array(5),function(d,i){ %>
+							<li>
+								<div class='tweet-block-2' >
+									<p class='handle'>@john</p>
+									<h2 class='text'>
+										Alteration to the 09:20 London Liverpool Street to Shenfield due 10:03 due to a late running train.<%= i %>	
+									</h2>
+								</div>
+							</li>
+						<% }) %>
 						</ul>
+					</div>
+					<div class='ani-block'>
+						<table class='train-table-block'>
+							<tr>
+						  		<td>test1</td>
+						  		<td>test</td>
+							</tr>
+						  	<tr>
+						    	<td>Client</td>
+						    	<td>Self Initiated</td> 
+						  	</tr>
+						</table>
 					</div>
 				</div>
 				<div class='col col-1-2'>
-					<div>
-						<h1>Barclays Bikes</h1>
+
+					<div class='ani-block'>
+						<h2>Uber</h2>
+					</div>
+
+					<div  class='ani-block'>
+						<h2>Barclays Bikes</h2>
 						<p>1km</p>
-						<div class='stat-block'>
-							<h1>17</h1>
-							<p>bikes</p>
-						</div>
-						<div class='stat-block'>
-							<h1>17</h1>
-							<p>bikes</p>
+						<div class='grid'>
+
+							<div class='col col-1-3 stat-block'>
+								<h1>17</h1>
+								<p>bikes</p>
+							</div>
+							<div class='col col-1-3 stat-block'>
+								<h1>17</h1>
+								<p>bikes</p>
+							</div>
 						</div>
 						<ul class='grid-chart-block'>
 							<% _.each(new Array(50),(d,i)=>{ %>
@@ -81,22 +101,19 @@
 							<% }) %>
 						</ul>
 					</div>
+
 				</div>
-
-				
-
-
 			</div>
 		</div>
 	</script>
 
 	<script id="twitter-sentiment-template" type="text/template">
-		<!-- <div class='transition-wipe pink'></div> -->
+		
 		<div class='view scene1'>
 			<div class='title-block'>
 				<h2 class='title'>
 					<span class='fill pink'>Twitter</span>
-					The Sentiment in King's Cross today is <span class='underline positive'>Positive</span> 
+					Emotions in King's Cross
 				</h2>
 			</div> 
 			<ul class='sentiment-emotions-chart'>
@@ -117,7 +134,7 @@
 				<% }) %>
 			</ul>
 		</div>
-		<!-- <div class='view scene2'>
+		<div class='view scene2'>
 			<div class='title-block'>
 				<h2 class='title'>
 					<span class='fill pink'>Twitter</span>
@@ -128,22 +145,28 @@
 				<div class='center'>
 					<ul class='twitter-loop-block'>
 						<% _.each(tweets,function(d,i){ %>
-							<li class='negative'>
-								<p class='handle'>@<%= d.user.screen_name %></p>
-								<h2><%= d.text %></h2><br/>
-								<% if('alchemy' in d){ %><% } %>
-								<div class='horizontal-bar' >
-									<p>negative</p><br/>
-									<div class='bar negative'> <span style='width:30%'></span> </div>
+							<li>
+								<div class='tweet-block-1 negative'>
+									<p class='handle'>@<%= d.user.screen_name %></p>
+									<h1><%= d.text %></h1><br/>
+									<div class='horizontal-bar' >
+										<p>Negative</p><br/>
+										<div class='bar negative'> <span style='width:30%'></span> </div>
+									</div>
 								</div>
 							</li>
 						<% }) %>
 					</ul>
 				</div>
 			</div>
-		</div> -->
+		</div>
+
 	</script>
 
+	<script id="map-template" type="text/template">
+		<h1>MAP</h1>
+		<div id='map' class='map-block'></div>
+	</script>
 
 	<!-- Plugins -->
 	<script type="text/javascript" src="/js/bower_components/jquery/dist/jquery.js"></script>
@@ -164,6 +187,7 @@
 	<script type="text/javascript" src="/js/views/floorplan.js"></script>
 	<script type="text/javascript" src="/js/views/twitterSentiment.js"></script>
 	<script type="text/javascript" src="/js/views/transport.js"></script>
+	<script type="text/javascript" src="/js/views/map.js"></script>
 
 	<!-- Start -->
 	<script type="text/javascript">App.Init();</script>

@@ -7,6 +7,7 @@
 			"floorplan":"floorplanView",
 			"twitter-sentiment":"twitterSentimentView",
 			"transport":"transportView",
+			"map":"mapView",
 			"*notFound": "notFound"
 		},
 		initialize:function(){
@@ -35,6 +36,11 @@
 		transportView:function(){
 			self.sectionDestroy(function(){
 				self.section = new App.View.TransportView();
+			});
+		},
+		mapView:function(){
+			self.sectionDestroy(function(){
+				self.section = new App.View.MapView();
 			});
 		},
 		notFound:function(){
