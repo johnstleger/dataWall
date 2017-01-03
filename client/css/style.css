@@ -781,7 +781,7 @@ html {
   width: 60%;
 }
 body {
-  background-color: #f00;
+  background-color: #000;
 }
 body #backbone-app {
   width: 100%;

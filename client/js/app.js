@@ -16,7 +16,7 @@
 		$(window).on("debouncedresize", setStage); setStage();
 
 
-
+		// Loading Transition ---
 		var wipe = App.$el.find('.transition-wipe');
 		App.LoadingTransition = new TimelineMax({ paused:true, onComplete:function(){ this.seek(0); } });
 		App.LoadingTransition

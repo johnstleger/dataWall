@@ -25,7 +25,6 @@
 	    		self.render();
 	    		App.LoadingTransition.tweenTo('complete'); 
 	    	},500);
-
 	    },
 	    initAnimation:function(){
 
@@ -88,9 +87,9 @@
 		    	tweets:self.data.TwitterKingsCross.statuses.slice(0,5)
 		    }));
 
-	    	self.Animation = self.initAnimation();
+	    	// self.Animation = self.initAnimation();
 			App.$el.append(self.$el);
-			if('Animation' in self){ self.Animation.play(); }
+			// if('Animation' in self){ self.Animation.play(); }
 	
 	    },
 	    destroy:function(callback){
