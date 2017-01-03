@@ -38,7 +38,8 @@ router.use('/twitter_agencies',(req,res)=>{
 
 let meetup = require('../data/meetup.js');
 router.use('/meetup',(req,res)=>{
-	meetup.getTopics().then((d)=>{ res.send(d); });
+	//meetup.getTopics().then((d)=>{ res.send(d); });
+	meetup.getEvents().then((d)=>{ res.send(d); });
 });
 
 
@@ -53,11 +54,11 @@ router.use('/meetup',(req,res)=>{
 
 
 // News --
-// router.use('/news',(req,res)=>{
-// 	let googleNews = require('../data/google-news.js');
-// 		// googleNews.get('Havas').then((d)=>{ res.send(d); });
-// 		// googleNews.get('Kings Cross').then((d)=>{ res.send(d); });
-// });
+router.use('/news',(req,res)=>{
+	let googleNews = require('../data/google-news.js');
+		googleNews.get('Havas').then((d)=>{ res.send(d); });
+		// googleNews.get('Kings Cross').then((d)=>{ res.send(d); });
+});
 
 
 

@@ -185,8 +185,8 @@ body -moz-osx-font-smoothing grayscale {
 body h1 {
   font-size: 55px;
   line-height: 85px;
-  font-size: 5vh;
-  line-height: 5.4vh;
+  font-size: 2.5vw;
+  line-height: 3.5vw;
   font-weight: 400;
   font-family: 'Droid Sans';
   font-family: 'Montserrat';
@@ -194,8 +194,8 @@ body h1 {
 body h2 {
   font-size: 45px;
   line-height: 65px;
-  font-size: 4vh;
-  line-height: 4.4vh;
+  font-size: 2.2vw;
+  line-height: 3.2vw;
   font-weight: 400;
   font-family: 'Droid Sans';
   font-family: 'Montserrat';
@@ -205,8 +205,8 @@ body p,
 body li {
   font-size: 37px;
   line-height: 47px;
-  font-size: 3vh;
-  line-height: 3.4vh;
+  font-size: 2.2vw;
+  line-height: 3.2vw;
   font-weight: 400;
   font-family: 'Droid Sans';
   font-family: 'Montserrat';
@@ -631,7 +631,7 @@ html {
 }
 .sentiment-emotions-chart {
   position: relative;
-  margin-top: 7vh;
+  margin-top: 3.4vw;
 }
 .sentiment-emotions-chart .axis-label {
   position: absolute;
@@ -656,8 +656,7 @@ html {
 }
 .sentiment-emotions-chart .centered-horizontal-bar {
   width: 80%;
-  margin: 30px auto;
-  margin: 4vh auto;
+  margin: 1.4vw auto;
   height: auto;
   display: block;
 }
@@ -669,13 +668,13 @@ html {
 .sentiment-emotions-chart .centered-horizontal-bar .label.center {
   display: block;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 0.2vw;
 }
 .sentiment-emotions-chart .centered-horizontal-bar .bar {
   width: calc(50% - 5px);
   float: left;
   height: 25px;
-  height: 2vh;
+  height: 1.3vw;
   display: block;
   background-color: #1e1e3e;
   position: relative;
@@ -734,11 +733,12 @@ html {
 .horizontal-bar .bar {
   width: 100%;
   float: left;
-  height: 2vh;
+  height: 1.3vw;
   display: block;
   background-color: #1e1e3e;
   position: relative;
   overflow: hidden;
+  margin-top: 1vw;
 }
 .horizontal-bar .bar span {
   position: absolute;
@@ -781,7 +781,7 @@ html {
   width: 60%;
 }
 body {
-  background-color: #000;
+  background-color: #fff;
 }
 body #backbone-app {
   width: 100%;
@@ -851,8 +851,8 @@ body #backbone-app .guide {
   pointer-events: none;
 }
 body #backbone-app .view {
-  width: calc(100% - 20vh);
-  height: calc(100% - 20vh);
+  width: calc(100% - 10vw);
+  height: calc(100% - 10vw);
   margin: 50px;
   border: 2px solid rgba(255,255,255,0.02);
   position: absolute;
@@ -870,18 +870,28 @@ body #backbone-app .view {
   perspective: 1000;
 }
 .stat-block {
-  padding-left: 3vh;
-  border-left: 0.7vh solid #f00;
+  padding-left: 1.5vw;
+  border-left: 0.4vw solid #f00;
+}
+.stat-block h1 {
+  font-size: 5vw;
+  font-weight: bold;
+}
+.stat-block.top-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-right: 1.5vw;
 }
 .title-block .title {
-  line-height: 8vh;
+  line-height: 4.5vw;
 }
 .title-block .title span.fill {
   line-height: inherit;
   height: inherit;
   background-color: #f00;
   display: inline-block;
-  padding: 0 3vh 0 3vh;
+  padding: 0 2vw 0 2vw;
   margin-right: 20px;
 }
 .title-block .title span.fill.pink {
@@ -896,7 +906,7 @@ body #backbone-app .view {
 .title-block .title span.underline:after {
   content: '';
   display: block;
-  height: 0.7vh;
+  height: 0.4vw;
   width: 100%;
   background-color: #f00;
   position: absolute;
@@ -909,7 +919,24 @@ body #backbone-app .view {
 .title-block .title span.underline.negative:after {
   background-color: #ff275b;
 }
-.map-block {
+.map-container {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+.map-container:after {
+  content: '';
+  padding-top: 56.25%;
+  display: block;
+}
+.map-container .map-block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.map-container .canvas-block {
   position: absolute;
   top: 0;
   left: 0;
@@ -917,13 +944,14 @@ body #backbone-app .view {
   height: 100%;
 }
 .grid-chart-block li {
-  width: calc(10% - 1vh);
-  margin-top: 1vh;
-  margin-right: 1vh;
+  width: calc(10% - 0.6vw);
+  margin-top: 0.6vw;
+  margin-right: 0.6vw;
   float: left;
   height: auto;
   display: block;
   background-color: #1e1e3e;
+  position: relative;
 }
 .grid-chart-block li:after {
   content: '';
@@ -935,18 +963,19 @@ body #backbone-app .view {
   height: 100%;
   display: block;
   position: absolute;
+  background-color: #f00;
 }
 table.train-table-block {
   color: #fff;
   width: 100%;
 }
 table.train-table-block tr {
-  border-bottom: 0.5vh solid #050028;
+  border-bottom: 0.6vw solid #050028;
 }
 table.train-table-block tr td {
-  padding: 10px 20px;
+  padding: 0.5vw 1.5vw;
   width: 50%;
-  border-left: 0.5vh solid #050028;
+  border-left: 0.6vw solid #050028;
   background-color: #1e1e3e;
 }
 table.train-table-block tr td:first-child {
@@ -954,23 +983,34 @@ table.train-table-block tr td:first-child {
 }
 ul.twitter-loop-block {
   width: 100%;
-  height: 36vh;
+  height: 16vw;
   display: block;
   position: relative;
-  margin: 3vh 0;
+  margin: 5vw 0;
 }
 ul.twitter-loop-block li {
   position: absolute;
   top: 0;
   left: 0;
 }
+ul.twitter-loop-block li div.tweet-block-3 .handle {
+  color: #ff275b;
+  margin-bottom: 1vw;
+}
+ul.twitter-loop-block li div.tweet-block-3 .text {
+  padding-left: 1.8vw;
+  border-left: 0.4vw solid #ff275b;
+  margin-bottom: 1vw;
+  font-size: 3.5vw;
+  line-height: 4vw;
+}
 ul.twitter-loop-block li div.tweet-block-2 .handle {
   color: #ff275b;
   margin-bottom: 10px;
 }
 ul.twitter-loop-block li div.tweet-block-2 .text {
-  padding-left: 3vh;
-  border-left: 0.7vh solid #ff275b;
+  padding-left: 1.8vw;
+  border-left: 0.4vw solid #ff275b;
 }
 ul.twitter-loop-block li div.tweet-block-1 {
   padding-left: 6vh;

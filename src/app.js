@@ -6,12 +6,12 @@ const express = require('express'),
 	  appEnv = cfenv.getAppEnv(),
 	  cors = require('cors');
 
-const db = require('./db'),
-	  loop = require('./loop');
+const db = require('./db');
+	  
 
 app.use(cors());
 app.use('/', express.static('./client'));
-// app.use('/api', require('./routes/api'));
+app.use('/api', require('./routes/api'));
 app.use('/api2', require('./routes/api2'));
 
 
@@ -20,7 +20,8 @@ db.connect((err)=>{
 	if(err) return console.log( 'No Mongo Connection ', err );
 	app.listen( appEnv.port, '0.0.0.0', ()=>{ 
 		console.log('Running ',appEnv.url); 
-		// loop.run();
+		const loop = require('./loop');
+		loop.run();
 	});
 });
 

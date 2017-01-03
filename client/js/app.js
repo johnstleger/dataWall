@@ -12,8 +12,8 @@
 			console.log("Stage changed")
 			App.Stage.Width = $(window).width();
 			App.Stage.Height = $(window).height();
-		};
-		$(window).on("debouncedresize", setStage); setStage();
+		}; setStage();
+		$(window).on("debouncedresize", setStage); 
 
 
 		// Loading Transition ---

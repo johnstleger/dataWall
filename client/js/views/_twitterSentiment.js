@@ -7,13 +7,10 @@
 	    	var self = this;
 	    	self.playhead = 0;
 			self.template = _.template($("#twitter-sentiment-template").html());
-			
-			$.getJSON('./api2/twitter', function( data ) {
-				console.log(data);
-				self.data=data;
-				self.render();
-				self.dataUpdate();
-			});			
+			self.dataUpdate();	
+			setInterval(function(){
+				self.dataUpdate();	
+			},30000);	
 	    },
 	    events:{
 	    	click:'dataUpdate'
@@ -21,10 +18,12 @@
 	    dataUpdate:function(){
 	    	var self = this;
 	    	App.LoadingTransition.tweenTo('active'); 
-	    	setTimeout(function(){
-	    		self.render();
+
+	    	$.getJSON('./api2/twitter', function( data ) {
+				self.data = data;
+				self.render();
 	    		App.LoadingTransition.tweenTo('complete'); 
-	    	},500);
+			});	
 	    },
 	    initAnimation:function(){
 
@@ -87,9 +86,9 @@
 		    	tweets:self.data.TwitterKingsCross.statuses.slice(0,5)
 		    }));
 
-	    	// self.Animation = self.initAnimation();
+	    	self.Animation = self.initAnimation();
 			App.$el.append(self.$el);
-			// if('Animation' in self){ self.Animation.play(); }
+			self.Animation.play();
 	
 	    },
 	    destroy:function(callback){

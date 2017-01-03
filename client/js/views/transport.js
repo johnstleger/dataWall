@@ -7,10 +7,7 @@
 	    	var self = this;
 	    	self.Vent = _.extend({},Backbone.Events);
 			self.template = _.template($("#transport-template").html());
-			getData(function(data){
-				self.data=data;
-				self.render();
-			});	
+			self.dataUpdate();
 	    },
 	    events:{
 	    	click:'dataUpdate'
@@ -18,11 +15,11 @@
 	    dataUpdate:function(){
 	    	var self = this;
 	    	App.LoadingTransition.tweenTo('active'); 
-	    	setTimeout(function(){
-	    		self.render();
-	    		App.LoadingTransition.tweenTo('complete'); 
-	    	},500);
-
+	    	$.get("/api2/transport", function(data) {
+	    		self.data = transportsampleData;
+				self.render();
+				App.LoadingTransition.tweenTo('complete'); 
+			});
 	    },
 	    initAnimation:function(){
 
@@ -43,22 +40,22 @@
 
 
 	    	// Main Animations'
-    		var tl = new TimelineMax({ onComplete:function(){ this.restart(); } });		
+    		// var tl = new TimelineMax({ onComplete:function(){ this.restart(); } });		
     		// Scene1
-			var s1 = {};
-    			s1.base = self.$('.scene1');
-    			s1.blocks = self.$('.ani-block');
+			// var s1 = {};
+   //  			s1.base = self.$('.scene1');
+   //  			s1.blocks = self.$('.ani-block');
 
-				TweenMax.set( s1.base, { opacity:0 });
-				TweenMax.set( s1.blocks, { y:100, opacity:0 });
+			// 	TweenMax.set( s1.base, { opacity:0 });
+			// 	TweenMax.set( s1.blocks, { y:100, opacity:0 });
 
-				tl.to(s1.base, 0.5, { opacity:1 })
-				  .staggerTo( s1.blocks, 0.5, { y:0, opacity:1 },0.1, '+=0.5')
-				  .set({}, {}, "+=1.5")
-				  .staggerTo( s1.blocks, 0.5, { y:-100, opacity:0 },0.1, '+=0.5')
-				  .addLabel('scene1');
+			// 	tl.to(s1.base, 0.5, { opacity:1 })
+			// 	  .staggerTo( s1.blocks, 0.5, { y:0, opacity:1 },0.1, '+=0.5')
+			// 	  .set({}, {}, "+=1.5")
+			// 	  .staggerTo( s1.blocks, 0.5, { y:-100, opacity:0 },0.1, '+=0.5')
+			// 	  .addLabel('scene1');
 
-			return tl;
+			// return tl;
 
 	    },
 	    render:function(){
@@ -69,7 +66,7 @@
 
 	    	self.Animation = self.initAnimation();
 			App.$el.append(self.$el);
-			if('Animation' in self){ self.Animation.play(); }
+			// if('Animation' in self){ self.Animation.play(); }
 			
 	    },
 	    destroy:function(callback){
@@ -86,73 +83,47 @@
 	});
 
 
+	var transportsampleData = {
+		tfl:{
+			lastUpdated:new Date(),
+			tweets:[
+				{
+	    			text:'Alteration to the 09:20 London Liverpool Street to Shenfield due 10:03 due to a late running train.',
+	    			handle:'@tfl',
+	    			date:new Date()
+	    		},
+	    		{
+	    			text:'Alteration to the 09:20 London Liverpool Street to Shenfield due 10:03 due to a late running train.',
+	    			handle:'@tfl',
+	    			date:new Date()
+	    		}
+			]
+		},
+		bike:{
+			lastUpdated:new Date(),
+			bikesCount:20,
+			spacesCount:40,
+			stations:[
+				{
+					name:'street 1',
+					geo:{ lat:0,lon:0 },
+					bikesCount:20,
+					spacesCount:40
+				},
+				{
+					name:'street 1',
+					geo:{ lat:0,lon:0 },
+					bikesCount:20,
+					spacesCount:40
+				}
+			]
+		},
+		uber:{
+			lastUpdated:new Date(),
+			approx:'10 mins'
+		}
+	};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	function getData(callback){
-		callback({
-			tfl:{
-	    		lastUpdated:new Date(),
-	    		tweets:[
-	    			{
-		    			text:'Alteration to the 09:20 London Liverpool Street to Shenfield due 10:03 due to a late running train.',
-		    			handle:'@tfl',
-		    			date:new Date()
-		    		},
-		    		{
-		    			text:'Alteration to the 09:20 London Liverpool Street to Shenfield due 10:03 due to a late running train.',
-		    			handle:'@tfl',
-		    			date:new Date()
-		    		}
-	    		]
-	    	},
-	    	bike:{
-	    		lastUpdated:new Date(),
-	    		bikesCount:20,
-	    		spacesCount:40,
-	    		stations:[
-	    			{
-	    				name:'street 1',
-	    				geo:{ lat:0,lon:0 },
-	    				bikesCount:20,
-	    				spacesCount:40
-	    			},
-	    			{
-	    				name:'street 1',
-	    				geo:{ lat:0,lon:0 },
-	    				bikesCount:20,
-	    				spacesCount:40
-	    			}
-	    		]
-	    	},
-	    	uber:{
-	    		lastUpdated:new Date(),
-	    		approx:'10mins'
-	    	}
-		});
-	}
 
 })();
+

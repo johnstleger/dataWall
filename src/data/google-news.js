@@ -7,7 +7,7 @@ const parseString = require('xml2js').parseString,
 	  cheerio = require('cheerio'),
 	  async = require('async');
 
-const helper = require('../helpers');
+// const helper = require('../helpers');
 
 const Encoder = new encoder('entity');
 
@@ -36,7 +36,7 @@ exports.get = function get(term){
 					item.source = title_split[title_split.length-1].trim();
 					item.fullDescription = $description("td.j div.lh").html();
 					item.description = ( item.title +" "+ $description("td.j div.lh>font:nth-child(5)").text() ).replace("<br/>"," ");
-					item.pubTime = helper.padNumber(date.getHours()) +":"+ helper.padNumber(date.getMinutes());
+					//item.pubTime = helper.padNumber(date.getHours()) +":"+ helper.padNumber(date.getMinutes());
 					item.pubDate = date.getDate()+"/"+( date.getMonth()+1 )+"/"+date.getFullYear();
 					item.fullPubDate = date;
 

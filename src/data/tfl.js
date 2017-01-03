@@ -15,7 +15,7 @@ exports.getTubeStatus = function(){
 exports.getBarclaysBike = function(){
 	return new Promise((fulfill,reject)=>{
 		
-		TFL_API('/BikePoint?lat='+hkx.lat+'&lon='+hkx.lon+'&radius=1000' ,(data)=>{
+		TFL_API('/BikePoint?lat='+hkx.lat+'&lon='+hkx.lon+'&radius=500' ,(data)=>{
 			
 			let prep = {
 				time: new Date(),

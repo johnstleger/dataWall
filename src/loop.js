@@ -1,15 +1,20 @@
-// const min = 1,
-// 	  interval = min*60*1000;
-
 const twitter = require('./data/twitter.js'),
-	  db = require('./db');
+	  googleNews = require('./data/google-news.js'),
+	  meetup = require('./data/meetup.js');
+
+const db = require('./db');
 
 exports.run = function(){
-	loadTwitter();
+
+	// Intervals go here --
+	// loadTwitter();
+	// loadHavasInTheMedia();
+	// loadMeetupData();
 }
 
+
+
 function loadTwitter(){
-	console.log("loading twitter")
 	Promise.all([
 		twitter.getHKXAgencies(),
 		twitter.getKingsCross()	
@@ -19,16 +24,30 @@ function loadTwitter(){
 		db.saveItem('twitter',prep).then((item)=>{
 			console.log('saved twitter');
 		});
-	})
-
+	});
 }
 
 
 
+function loadHavasInTheMedia(){
+	googleNews.get('Havas').then((HavasInTheMedia)=>{
+		let prep = { date : new Date(), HavasInTheMedia};
+		db.saveItem('havasInTheMedia',prep).then((item)=>{
+			console.log('saved twitter');
+		});
+	});
+}
 
 
 
+function loadMeetupData(){
+	meetup.getEvents().then((MeetupEvents)=>{ 
+		let prep = { date : new Date(), MeetupEvents};
+		db.saveItem('meetupEvents',prep).then((item)=>{
+			console.log('saved meetup events');
+		});
+	});
+}
 
 
 
-// setInterval(()=>{ loadTwitter(); },interval);

@@ -25,7 +25,7 @@
 
 
 body
-	background-color #000
+	background-color #FFF
 
 	#backbone-app
 		width 100%
@@ -76,8 +76,8 @@ body
 
 
 		.view
-			width calc(100% - 20vh)
-			height calc(100% - 20vh)
+			width calc(100% - 10vw)
+			height calc(100% - 10vw)
 			margin 50px
 			border 2px solid rgba(255,255,255,0.02)
 			position absolute
@@ -100,20 +100,27 @@ body
 // Blocks --
 
 .stat-block
-	padding-left $pad
+	padding-left 1.5vw
 	border-left $line-width solid red
+	h1
+		font-size 5vw
+		font-weight bold
 
-
+	&.top-right
+		position absolute
+		top 0
+		right 0
+		padding-right 1.5vw
 
 .title-block
 	.title
-		line-height 8vh
+		line-height 4.5vw
 		span.fill
 			line-height inherit
 			height inherit
 			background-color red
 			display inline-block
-			padding 0 3vh 0 3vh
+			padding 0 2vw 0 2vw
 			margin-right 20px
 			&.pink
 				background-color #ff275b
@@ -126,7 +133,7 @@ body
 			&:after
 				 content ''
 				 display block
-				 height 0.7vh
+				 height $line-width
 				 width 100%
 				 background-color red
 				 position absolute
@@ -137,23 +144,38 @@ body
 			&.negative:after
 				background-color $pink
 
-
-.map-block
-	position absolute
-	top 0
-	left 0
+.map-container
 	width 100%
-	height 100%
+	height auto
+	position relative
+	&:after
+		content ''
+		padding-top 56.25%
+		display block
+	.map-block
+		position absolute
+		top 0
+		left 0
+		width 100%
+		height 100%
+	.canvas-block
+		position absolute
+		top 0
+		left 0
+		width 100%
+		height 100%
+
 
 .grid-chart-block
 	li
-		width calc(10% - 1vh)
-		margin-top 1vh
-		margin-right 1vh
+		width calc(10% - 0.6vw)
+		margin-top 0.6vw
+		margin-right 0.6vw
 		float left
 		height auto
 		display block
 		background-color $bg_light
+		position relative
 		&:after
 			content ''
 			display block
@@ -163,6 +185,7 @@ body
 			height 100%
 			display block
 			position absolute
+			background-color red
 
 
 
@@ -170,11 +193,11 @@ table.train-table-block
 	color #FFF
 	width 100%
 	tr
-		border-bottom 0.5vh solid $bg
+		border-bottom 0.6vw solid $bg
 		td
-			padding 10px 20px
+			padding 0.5vw 1.5vw
 			width 50%
-			border-left 0.5vh solid $bg
+			border-left 0.6vw solid $bg
 			background-color $bg_light
 			&:first-child
 				width 25%
@@ -182,7 +205,7 @@ table.train-table-block
 
 ul.twitter-loop-block
 	width 100%
-	height 36vh
+	height 16vw
 	display block
 	position relative
 	margin $pad 0
@@ -191,13 +214,26 @@ ul.twitter-loop-block
 		top 0
 		left 0
 
+
+		div.tweet-block-3 
+			.handle
+				color $pink
+				margin-bottom 1vw
+			.text
+				padding-left 1.8vw
+				border-left $line-width solid $pink
+				margin-bottom 1vw
+				font-size 3.5vw
+				line-height 4vw
+
+
 		div.tweet-block-2 
 			.handle
 				color $pink
 				margin-bottom 10px
 			.text
-				padding-left 3vh
-				border-left 0.7vh solid $pink
+				padding-left 1.8vw
+				border-left $line-width solid $pink
 
 
 		div.tweet-block-1

@@ -1,15 +1,7 @@
-(function(){
+;(function(){
 	var self;
 	App.Router = Backbone.Router.extend({
 		section:null,
-		routes: {
-			"":"titleView",
-			"floorplan":"floorplanView",
-			"twitter-sentiment":"twitterSentimentView",
-			"transport":"transportView",
-			"map":"mapView",
-			"*notFound": "notFound"
-		},
 		initialize:function(){
 			self = this;
 			Backbone.history.start();
@@ -18,19 +10,23 @@
 			if(!self.section) return done();
 			self.section.destroy(function(){ self.section=null; done(); }); 
 		},
+		routes: {
+			"":"titleView",
+			"havas-news":"havasNewsView",
+			"twitter-kings-cross-sentiment":"twitterKingsCrossSentimentView",
+			"transport":"transportView",
+			"map":"mapView",
+			"floorplan":"floorplanView",
+			"*notFound": "notFound"
+		},
 		titleView:function(){
 			self.sectionDestroy(function(){
 				self.section = new App.View.TitleView();
 			});
 		},
-		floorplanView:function(){
+		havasNewsView:function(){
 			self.sectionDestroy(function(){
-				self.section = new App.View.FloorplanView();
-			});
-		},
-		twitterSentimentView:function(){
-			self.sectionDestroy(function(){
-				self.section = new App.View.TwitterSentimentView();
+				self.section = new App.View.HavasNewsView();
 			});
 		},
 		transportView:function(){
@@ -38,9 +34,19 @@
 				self.section = new App.View.TransportView();
 			});
 		},
+		twitterKingsCrossSentimentView:function(){
+			self.sectionDestroy(function(){
+				self.section = new App.View.TwitterKingsCrossSentiment();
+			});
+		},
 		mapView:function(){
 			self.sectionDestroy(function(){
 				self.section = new App.View.MapView();
+			});
+		},
+		floorplanView:function(){
+			self.sectionDestroy(function(){
+				self.section = new App.View.FloorplanView();
 			});
 		},
 		notFound:function(){
