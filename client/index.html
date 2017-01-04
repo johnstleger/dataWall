@@ -33,7 +33,13 @@
 
 
 	<script id="floorplan-template" type="text/template">
-		<h2>Floor Plan</h2>
+		<div class='view scene1'>
+			<div class='title-block'>
+				<h2 class='title'>
+					<span class='fill pink'>Location</span> HKX Plan
+				</h2>
+			</div> 
+		</div> 
 	</script>
 
 
@@ -42,7 +48,7 @@
 
 	<script id="transport-template" type="text/template">
 		
-		<!-- <div class='view scene1'>
+		<div class='view scene1'>
 			<div class='title-block'>
 				<h2 class='title'><span class='fill pink'>Transport</span> Travel </h2>
 			</div>
@@ -89,7 +95,7 @@
 
 				</div>
 			</div>
-		</div>-->
+		</div>
 
 		<div class='view scene2'>
 			<div class='title-block'>
@@ -227,13 +233,15 @@
 
 
 	<script id="map-template" type="text/template">
-	
-		<div class='map-container'>
-			<div id='map' class='map-block'></div>
-			<canvas id="mapCanvas" class='canvas-block'></canvas>
-			<div id='tool' class='tool-tip' >
-				
-			</div> 
+		
+		<div class='view no-margins scene1'>
+			<div class='map-container'>
+				<div id='map' class='map-block'></div>
+				<canvas id="mapCanvas" class='canvas-block'></canvas>
+				<div id='tool' class='tool-tip' >
+					
+				</div> 
+			</div>
 		</div>
 		
 		<div class='view scene2'>

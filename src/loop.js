@@ -9,7 +9,7 @@ exports.run = function(){
 	// Intervals go here --
 	// loadTwitter();
 	// loadHavasInTheMedia();
-	// loadMeetupData();
+	loadMeetupData();
 }
 
 

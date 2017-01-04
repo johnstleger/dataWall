@@ -1,7 +1,7 @@
 (function(){
 	App.View.FloorplanView = Backbone.View.extend({
 		id:'FloorplanView',
-		className:'view',
+		className:'',
 		playhead:0,
 	    initialize:function(){
 	    	var self = this;

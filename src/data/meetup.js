@@ -8,11 +8,11 @@ exports.getEvents = function(){
 		let params = {
 			lat:hkx.lat,
 			lon:hkx.lon,
-			radius:1,
+			radius:3,
 			page:20,
 			status:'upcoming',
 			fields:'category, topics',
-			order:'time'
+			order:'distance'
 		}; 
 		
 		let artsParams = _.clone(params);
@@ -29,8 +29,20 @@ exports.getEvents = function(){
 			getEventsInCategory(techParams),
 			getEventsInCategory(writingParams)	
 		]).then((data)=>{
+
 			let [ arts, tech, writing ] = data;
+
+			arts.colorRGB = [0,204,204];
+			arts.category = 'arts';
+
+			tech.colorRGB = [255,39,91];
+			tech.category = 'tech';
+
+			writing.colorRGB = [21,152,209];
+			writing.category = 'writing';
+
 			fulfill({ arts, tech, writing });
+
 		});
 
 		function getEventsInCategory(in_params){
