@@ -8,8 +8,6 @@
 	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/css/style.css"/>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgktFOsilQgDvScgjEyOST_EGHM5WwAUs&libraries=places" type="text/javascript"></script>
-	<script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
-	<script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
 </head>
 <body>	
 
@@ -226,11 +224,27 @@
 
 	</script>
 
+
+
 	<script id="map-template" type="text/template">
+	
 		<div class='map-container'>
 			<div id='map' class='map-block'></div>
-			<canvas id="demoCanvas" class='canvas-block' width="1920" height="1080"></canvas>
+			<canvas id="mapCanvas" class='canvas-block'></canvas>
+			<div id='tool' class='tool-tip' >
+				
+			</div> 
 		</div>
+		
+		<div class='view scene2'>
+			<div class='title-block'>
+				<h2 class='title'>
+					<span class='fill pink'>Meetups</span>
+					Meetups within <span class='underline positive'>1km</span>
+				</h2>
+			</div>
+		</div>
+
 	</script>
 
 	<!-- Plugins -->
@@ -240,6 +254,7 @@
 	<script type="text/javascript" src="/js/bower_components/gsap/src/minified/TweenMax.min.js"></script>
 	<script type="text/javascript" src="/js/bower_components/moment/moment.js"></script>
 	<script type="text/javascript" src="/js/bower_components/d3/d3.js"></script>
+	<script type="text/javascript" src="/js/bower_components/EaselJS/lib/easeljs-0.8.2.combined.js"></script>
 	<script type="text/javascript" src="/js/plugins/d3-extension.js"></script>
 	<script type="text/javascript" src="/js/plugins/jquery.debouncedresize.js"></script>
 
