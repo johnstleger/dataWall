@@ -2,6 +2,7 @@
 	window.App = {};
 	App.$el = $('#backbone-app');
 	App.Vent = _.extend({},Backbone.Events);
+	App.Module = {};
 	App.View = {};
 	App.Helper = {};
 	App.Stage = {};

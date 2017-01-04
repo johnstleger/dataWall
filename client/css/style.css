@@ -957,6 +957,22 @@ body #backbone-app .view {
   top: 0;
   left: 0;
   background-color: #f00;
+  padding: 10px 20px;
+}
+.map-container .tool-tip:before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  display: block;
+  background-color: #f00;
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 .grid-chart-block li {
   width: calc(10% - 0.6vw);
