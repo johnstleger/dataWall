@@ -18,7 +18,6 @@
 	    dataUpdate:function(){
 	    	var self = this;
 	    	App.LoadingTransition.tweenTo('active'); 
-
 	    	$.getJSON('./api2/twitter', function( data ) {
 				self.data = data;
 				self.render();

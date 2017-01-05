@@ -46,8 +46,8 @@
 			self.width = self.$el.width();
 			self.height = self.width*0.5625; //16x9
 
-
-			self.toolTip = self.$el.find('#tool');
+			self.toolTip = self.$el.find('#tool-tip');
+			self.categoryStat = self.$el.find('#category-stat');
 
 			// Create Stage
 			var stageElement = self.$el.find('#mapCanvas');
@@ -60,12 +60,18 @@
 			
 			// Add office location
 			var hkx = self.convertLatLng({lat:51.534409,lng:-0.125074})
-			var hkxDot = new createjs.Shape();
-				hkxDot.graphics.beginFill('#FFF').drawCircle(hkx.x, hkx.y, 6).endFill();
+			var hkxIcon = new createjs.Shape();
+				hkxIcon.graphics.beginFill('#FFF').drawRect(0, 20, 30,10).drawRect(0, 0, 10,30).endFill();
+				hkxIcon.x = hkx.x;
+				hkxIcon.y = hkx.y;
+				hkxIcon.regX = 0;	
+				hkxIcon.regY = 30;
+				hkxIcon.rotation= -45;
+
 			var hkxCircle = new createjs.Shape();
-				hkxCircle.graphics.beginStroke('rgba(255,255,255,0.6)').setStrokeStyle(2).drawCircle(hkx.x, hkx.y, 450).endStroke();
-			
-			self.stage.addChild( hkxDot, hkxCircle);
+				hkxCircle.graphics.setStrokeStyle(3).beginStroke("rgba(255,255,255,0.3)").drawCircle(hkx.x,hkx.y, self.width*0.3);
+
+			self.stage.addChild( hkxIcon, hkxCircle );
 
 
 			// Add all meetups
@@ -80,21 +86,21 @@
 				
 			var self = this;
 
-			var locations = eventCategory.locations;
-			var color = eventCategory.colorRGB.join(',');
+			var locations = eventCategory.locations,
+				color = eventCategory.colorRGB.join(',');
 
 			var output = { dots:[], marks:[] };
 			
-			_.each(locations, function(d,i){
+			_.each(locations, function(location,i){
 				
-				d = self.convertLatLng(d);
+				location = self.convertLatLng(location);
 
 				var mark = new createjs.Shape();
-					mark.graphics.beginFill('rgba('+color+',0.2)').beginStroke('rgb('+color+')').setStrokeStyle(3).drawCircle(0, 0, d.scale);
+					mark.graphics.beginFill('rgba('+color+',0.2)').beginStroke('rgb('+color+')').setStrokeStyle(3).drawCircle(0, 0, location.scale);
 					mark.regX = mark.width/2;	
 					mark.regY = mark.height/2;
 
-				TweenMax.set(mark, { x: d.x, y:d.y });
+				TweenMax.set(mark, { x: location.x, y:location.y });
 				self.stage.addChild(mark); 
 				output.marks.push(mark);
 
@@ -103,10 +109,9 @@
 					dot.regX = dot.width/2;	
 					dot.regY = dot.height/2;
 
-				TweenMax.set(dot, { x: d.x, y:d.y });
+				TweenMax.set(dot, { x: location.x, y:location.y });
 				self.stage.addChild(dot); 
 				output.dots.push(dot);
-
 
 			});
 			return output;
@@ -121,7 +126,8 @@
 			// Set scene default --
 			_.each(self.meetupEventCategories,function(eventCategory,key){
 				self.Tl
-					.set(self.toolTip, { y: -20, opacity:0 })
+					.set(self.toolTip, { x: -20, opacity:0 })
+					.set(self.categoryStat, { opacity:0 })
 					.set(eventCategory.markers.marks, { scaleX:0, scaleY: 0 })
 					.set(eventCategory.markers.dots, { scaleX:0, scaleY: 0 });
 			});
@@ -129,29 +135,26 @@
 			// Add scene for each meetup category --
 			_.each(self.meetupEventCategories,function(eventCategory,key){
 				self.Tl
-					.to(eventCategory.markers.dots, 0.5, { scaleX:1, scaleY:1, ease: Expo.easeOut },"+=0.5")
-					.staggerTo(eventCategory.markers.marks, 1, { scaleX:1, scaleY:1, ease: Expo.easeOut },0.1,"-=0.5")
-					.to(eventCategory.markers.marks, 0.5, { alpha:0.0 },"+=0.5");
+					.call(function(){ self.categoryStat.html('<h1>'+eventCategory.locations.length+'</h1><p>'+key+'</p>'); },[],self)
+					.to(self.categoryStat, 0.5, { opacity:1 })
+					.to(eventCategory.markers.dots, 0.5, { scaleX:1, scaleY:1, ease: Expo.easeOut },"-=0.5")
+					.staggerTo(eventCategory.markers.marks, 1, { scaleX:1, scaleY:1, ease: Back.easeOut.config(1.7)  },0.05,"-=0.5")
+					.to(eventCategory.markers.marks, 0.5, { alpha:0.0 },"+=4");
 
 					_.each(eventCategory.markers.marks.slice(0,10), function(mark,i){
-						var location = eventCategory.locations[i];
 						self.Tl
-							.to(mark, 0.5, { alpha:1 },"-=0.2")
-							.call(function(){ 
-								self.toolTip.html(location.title);
-								TweenMax.set(self.toolTip, { top:location.y, left: location.x });
-							},[],"-=0.5")
-							.to(self.toolTip, 0.5, { y:0, opacity:1 })
-							.to(self.toolTip, 0.5, { opacity:0 },"+=1")
-							.set(self.toolTip, { y:-20 })
-							.to(mark, 0.5, { alpha:0 },"-=0.5")
-							.set({},{},"+=0.1");
-
+							.set(mark, { scaleX:0, scaleY:0, alpha:0 },"-=0.4")
+							.to(mark, 0.5, { scaleX:1, scaleY:1, alpha:1, ease: Back.easeOut.config(1.7) })
+							.call(self.updateToolTip,[eventCategory.locations[i]],self,"-=0.5")
+							.to(self.toolTip, 0.5, { x:0, opacity:1 , ease: Power2.easeOut })
+							.to(self.toolTip, 0.5, { opacity:0, x:-20 },"+=1")
+							.to(mark, 0.5, { scaleX:0, scaleY:0, alpha:0 },"-=0.5");
 					});
 
 					self.Tl
 						.to(eventCategory.markers.dots, 0.5, { scaleX:0, scaleY:0, ease: Expo.easeOut })
-						.staggerTo(eventCategory.markers.marks, 1, { scaleX:0, scaleY:0, ease: Expo.easeOut },0.1,"-=0.5");
+						.to(self.categoryStat, 0.5, { opacity:0 },"-=0.5")
+						.to(eventCategory.markers.marks, 0.5, { scaleX:0, scaleY:0, ease: Expo.easeOut },"-=0.5");
 					
 			});
 
@@ -160,7 +163,10 @@
 		}
 
 		this.convertLatLng = function(input){
-			if( 'x' in input){ return input; }
+
+			// Converts google map coords to pixels
+			if( 'x' in input){ return input; } // exit if pixels already exist on input object
+			
 			var self = this;
 			var scale = Math.pow(2, self.map.getZoom());
 			
@@ -182,6 +188,12 @@
 			input.y = pixelOffset.y;
 			return input;
 		}	
+
+		this.updateToolTip = function(location){ 
+			var self = this;
+			self.toolTip.html(location.title); // Load tooltip contents --
+			TweenMax.set(self.toolTip, { top:location.y, left: location.x });
+		}
 	}
 
 })();

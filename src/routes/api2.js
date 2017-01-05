@@ -12,6 +12,11 @@ router.use('/havasInTheMedia',(req,res)=>{
 		res.send(data);
 	});
 });
+router.use('/havasDataNews',(req,res)=>{
+	db.getCollection('havasDataNews').then((data)=>{
+		res.send(data);
+	});
+});
 
 router.use('/meetupEvents',(req,res)=>{
 	db.getCollection('meetupEvents').then((data)=>{
@@ -19,6 +24,11 @@ router.use('/meetupEvents',(req,res)=>{
 	});
 });
 
+router.use('/twitter',(req,res)=>{
+	db.getCollection('twitter').then((data)=>{
+		res.send(data);
+	});
+});
 
 // Incomplete --
 router.use('/transport',(req,res)=>{

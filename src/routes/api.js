@@ -61,6 +61,11 @@ router.use('/news',(req,res)=>{
 });
 
 
+// let dataNews = require('../data/alchemy/dataNews.js');
+// router.use('/dataNews',(req,res)=>{ 
+// 	dataNews.getNews().then((d)=>{ res.send(d); });
+// });
+
 
 module.exports = router;
 

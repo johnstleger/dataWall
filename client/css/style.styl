@@ -21,9 +21,6 @@
 @import "styl/center.styl"
 
 
-
-
-
 body
 	background-color #FFF
 
@@ -104,16 +101,24 @@ body
 
 .stat-block
 	padding-left 1.5vw
-	border-left $line-width solid red
+	padding-top 1vw
+	border-left $line-width solid $bg_light
 	h1
 		font-size 5vw
 		font-weight bold
-
+		padding-bottom 1vw
 	&.top-right
 		position absolute
 		top 0
 		right 0
 		padding-right 1.5vw
+	&.blue
+		border-left $line-width solid $blue
+	&.teal
+		border-left $line-width solid $teal
+	&.pink
+		border-left $line-width solid $pink
+
 
 .title-block
 	.title
@@ -126,8 +131,11 @@ body
 			padding 0 2vw 0 2vw
 			margin-right 20px
 			&.pink
-				background-color #ff275b
-
+				background-color $pink
+			&.teal
+				background-color $teal
+			&.blue
+				background-color $blue
 		span.underline
 			line-height inherit
 			height inherit
@@ -176,34 +184,23 @@ body
 		top 0 
 		left 0 
 		color #FFF
-		padding 1vw
-		max-width 34vw
+		max-width 25vw
 		font-size 2vw
-		background-color red
-		margin-left -30px
-		margin-top 20px
-		background rgba(0,0,0,0.4)
-		&:after
+		line-height 2.6vw
+		margin-left 3vw
+		margin-top -1vw
+		text-shadow 0px 0px 10px #000
+		&:before
 			content ''
-			width 0
-			height 0
-			border 20px solid transparent
-			border-bottom 20px solid rgba(0,0,0,0.4)
+			width 1.2vw
+			height 1.2vw
 			display block
+			border-top 0.45vw solid #FFF
+			border-left 0.45vw solid #FFF
 			position absolute
-			top -40px
-			left 10px
-		// &:before
-		// 	content ''
-		// 	width 20px
-		// 	height 20px
-		// 	display block
-		// 	background-color red
-		// 	position absolute
-		// 	top -10px
-		// 	left 20px
-		// 	transform rotate(45deg)
-
+			top 0.4vw
+			left -1.7vw
+			transform rotate(-45deg)
 
 .grid-chart-block
 	li
@@ -294,3 +291,5 @@ ul.twitter-loop-block
 				height auto
 				text-align right
 				transform rotate(-90deg) translateX(-100%)
+
+

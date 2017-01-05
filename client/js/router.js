@@ -14,6 +14,7 @@
 			"":"titleView",
 			"havas-news":"havasNewsView",
 			"twitter-kings-cross-sentiment":"twitterKingsCrossSentimentView",
+			"twitter-hkx":"twitterHKXView",
 			"transport":"transportView",
 			"map":"mapView",
 			"floorplan":"floorplanView",
@@ -27,6 +28,11 @@
 		havasNewsView:function(){
 			self.sectionDestroy(function(){
 				self.section = new App.View.HavasNewsView();
+			});
+		},
+		twitterHKXView:function(){
+			self.sectionDestroy(function(){
+				self.section = new App.View.TwitterHKX();
 			});
 		},
 		transportView:function(){

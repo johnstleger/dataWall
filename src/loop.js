@@ -1,15 +1,16 @@
 const twitter = require('./data/twitter.js'),
 	  googleNews = require('./data/google-news.js'),
-	  meetup = require('./data/meetup.js');
+	  meetup = require('./data/meetup.js'),
+	  dataNews = require('./data/alchemy/dataNews.js');
 
 const db = require('./db');
 
 exports.run = function(){
-
 	// Intervals go here --
 	// loadTwitter();
 	// loadHavasInTheMedia();
-	loadMeetupData();
+	// loadHavasDataNews();
+	// loadMeetupData();
 }
 
 
@@ -38,6 +39,14 @@ function loadHavasInTheMedia(){
 	});
 }
 
+function loadHavasDataNews(){
+	dataNews.getNews().then((DataNews)=>{ 
+		let prep = { date : new Date(), DataNews };
+		db.saveItem('havasDataNews',prep).then((item)=>{
+			console.log('saved data news');
+		});
+	});
+}
 
 
 function loadMeetupData(){

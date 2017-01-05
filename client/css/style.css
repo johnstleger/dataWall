@@ -255,10 +255,6 @@ body label {
 body svg {
   visibility: visible;
 }
-body img {
-  width: 100%;
-  display: block;
-}
 html {
   box-sizing: border-box;
 }
@@ -741,10 +737,8 @@ html {
   margin-top: 1vw;
 }
 .horizontal-bar .bar span {
-  position: absolute;
-  top: 0;
+  float: left;
   height: 100%;
-  background-color: #ff275b;
   width: 0;
   -webkit-transform: translate3d(0, 0, 0);
   -moz-transform: translate3d(0, 0, 0);
@@ -758,6 +752,60 @@ html {
   -ms-transition: all 1000ms cubic-bezier(0.615, 0.015, 0.44, 1);
   -o-transition: all 1000ms cubic-bezier(0.615, 0.015, 0.44, 1);
   transition: all 1000ms cubic-bezier(0.615, 0.015, 0.44, 1);
+  margin-right: 10px;
+}
+.horizontal-bar .bar.negative span {
+  background-color: #ff275b;
+}
+.horizontal-bar-stacked {
+  margin: 1.4vw auto;
+}
+.horizontal-bar-stacked:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+.horizontal-bar-stacked .bar {
+  width: 100%;
+  float: left;
+  height: 1vw;
+  display: block;
+  background-color: #1e1e3e;
+  position: relative;
+  overflow: hidden;
+  margin-top: 0.7vw;
+}
+.horizontal-bar-stacked .bar span {
+  float: left;
+  height: 100%;
+  width: 0;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000;
+  -webkit-transition: all 1000ms cubic-bezier(0.615, 0.015, 0.44, 1);
+  -moz-transition: all 1000ms cubic-bezier(0.615, 0.015, 0.44, 1);
+  -ms-transition: all 1000ms cubic-bezier(0.615, 0.015, 0.44, 1);
+  -o-transition: all 1000ms cubic-bezier(0.615, 0.015, 0.44, 1);
+  transition: all 1000ms cubic-bezier(0.615, 0.015, 0.44, 1);
+}
+.horizontal-bar-stacked .bar span.negative {
+  background-color: #ff275b;
+}
+.horizontal-bar-stacked .bar span.positive {
+  background-color: #1598d1;
+}
+.horizontal-bar-stacked .bar span.blue {
+  background-color: #1598d1;
+}
+.horizontal-bar-stacked .bar span.teal {
+  background-color: #0cc;
+}
+.horizontal-bar-stacked .bar span.pink {
+  background-color: #ff275b;
 }
 .center-block {
   position: absolute;
@@ -875,17 +923,28 @@ body #backbone-app .view.no-margins {
 }
 .stat-block {
   padding-left: 1.5vw;
-  border-left: 0.4vw solid #f00;
+  padding-top: 1vw;
+  border-left: 0.4vw solid #1e1e3e;
 }
 .stat-block h1 {
   font-size: 5vw;
   font-weight: bold;
+  padding-bottom: 1vw;
 }
 .stat-block.top-right {
   position: absolute;
   top: 0;
   right: 0;
   padding-right: 1.5vw;
+}
+.stat-block.blue {
+  border-left: 0.4vw solid #1598d1;
+}
+.stat-block.teal {
+  border-left: 0.4vw solid #0cc;
+}
+.stat-block.pink {
+  border-left: 0.4vw solid #ff275b;
 }
 .title-block .title {
   line-height: 4.5vw;
@@ -900,6 +959,12 @@ body #backbone-app .view.no-margins {
 }
 .title-block .title span.fill.pink {
   background-color: #ff275b;
+}
+.title-block .title span.fill.teal {
+  background-color: #0cc;
+}
+.title-block .title span.fill.blue {
+  background-color: #1598d1;
 }
 .title-block .title span.underline {
   line-height: inherit;
@@ -961,24 +1026,28 @@ body #backbone-app .view.no-margins {
   top: 0;
   left: 0;
   color: #fff;
-  padding: 1vw;
-  max-width: 34vw;
+  max-width: 25vw;
   font-size: 2vw;
-  background-color: #f00;
-  margin-left: -30px;
-  margin-top: 20px;
-  background: rgba(0,0,0,0.4);
+  line-height: 2.6vw;
+  margin-left: 3vw;
+  margin-top: -1vw;
+  text-shadow: 0px 0px 10px #000;
 }
-.map-container .tool-tip:after {
+.map-container .tool-tip:before {
   content: '';
-  width: 0;
-  height: 0;
-  border: 20px solid transparent;
-  border-bottom: 20px solid rgba(0,0,0,0.4);
+  width: 1.2vw;
+  height: 1.2vw;
   display: block;
+  border-top: 0.45vw solid #fff;
+  border-left: 0.45vw solid #fff;
   position: absolute;
-  top: -40px;
-  left: 10px;
+  top: 0.4vw;
+  left: -1.7vw;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
 }
 .grid-chart-block li {
   width: calc(10% - 0.6vw);

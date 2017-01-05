@@ -20,6 +20,20 @@
 				self.render();
 				App.LoadingTransition.tweenTo('complete'); 
 			});
+
+
+
+	    	$.get("/api2/havasDataNews", function(data) {
+	    		console.log(data);
+			});
+
+
+
+
+			
+
+
+
 	    },
 	    initAnimation:function(){
 	    	var tweetsLoop = {};
